@@ -4,7 +4,7 @@ import type { WorkflowStatus } from "@/lib/types";
 export const dynamic = "force-dynamic";
 
 const OWNER = process.env.GITHUB_REPO_OWNER ?? "makeitcount89";
-const REPO = process.env.GITHUB_REPO_NAME ?? "gear-bboz";
+const REPO = process.env.GITHUB_REPO_NAME ?? "GEAR-BBOZ";
 const WORKFLOW_FILE = process.env.GITHUB_WORKFLOW_FILE ?? "run_strategy.yml";
 
 /**
