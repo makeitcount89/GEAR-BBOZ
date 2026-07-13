@@ -11,6 +11,14 @@ on:
   schedule:
     - cron: "45 4 * * 2,5"  # 14:15 ACST (UTC+9:30) - non-DST months
     - cron: "45 3 * * 2,5"  # 14:15 ACDT (UTC+10:30) - DST months
+  # Also refresh immediately whenever the engine's own logic/config changes, rather
+  # than waiting for the next Tue/Fri cron -- a parameter or model change should be
+  # reflected on the dashboard right away, not silently sit stale for days.
+  push:
+    branches:
+      - claude/gear-bboz-model-lnas-gql28g
+    paths:
+      - "scripts/engine.py"
   workflow_dispatch: {}
 
 permissions:
@@ -47,10 +55,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- public/strategy_data.json; then
+          git add public/strategy_data.json
+          if git diff --quiet --staged -- public/strategy_data.json; then
             echo "No change in strategy_data.json, skipping commit."
             exit 0
           fi
-          git add public/strategy_data.json
           git commit -m "chore: update strategy data [skip ci]"
           git push

@@ -204,32 +204,52 @@ FLAT_BAND_PCT = 0.5
 # a resting state at all. This long-biased design (validated on LNAS/SNAS) is what
 # this engine runs for GEAR/BBOZ from the start, rather than re-deriving it.
 # ----------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------
+# The four thresholds below (ALIGNMENT_MARGIN_PCT, RS_LOOKBACK_DAYS, LIQUIDITY_MIN_RATIO,
+# PULLBACK_MAX_EXTENSION_PCT) were re-tuned specifically against GEAR.AX/BBOZ.AX's own
+# real walk-forward history by scripts/tune.py (Stage A: a greedy grid search scored on
+# the same 8 validation windows the dashboard reports), rather than left at the values
+# carried over unchanged from the sibling LNAS/SNAS strategy. That first re-tuning pass
+# alone moved mean walk-forward return from -16.22% to -11.78% and win rate from 46.83%
+# to 47.07% across the 8 windows -- better, but still a losing mean return; see
+# scripts/tuning_report.json for the full grid and runner-up candidates, and the
+# volatility/MA override comments further below for the second tuning pass that turned
+# the mean return positive. This was fit to a small number of overlapping-instrument
+# windows (see tune.py's own caveats) -- a real re-calibration, not a guarantee it holds
+# on future sessions.
+# ------------------------------------------------------------------------------------
 # Trend alignment: the short/long EMA group *means* must be ordered in the called
 # direction by at least this margin. Originally required the entire short EMA range
 # to sit above/below the entire long EMA range with zero overlap -- a much stricter
 # bar than real GMMA setups usually clear, since the two groups' innermost members
 # often brush against each other even in a clean trend. Comparing group centers (with
 # a small required margin, rather than a hard zero-overlap requirement) still rejects
-# noise-level crossings while tolerating a few EMAs overlapping between groups.
-ALIGNMENT_MARGIN_PCT = 0.1
+# noise-level crossings while tolerating a few EMAs overlapping between groups. Tuned
+# down from 0.1 (the LNAS/SNAS value) to 0.0 on GEAR/BBOZ's own history -- requiring
+# no margin at all, just the correct ordering of the two group centers, scored best.
+ALIGNMENT_MARGIN_PCT = 0.0
 # Relative strength: the underlying's own trailing return must agree with the called
-# direction. Shortened from 60 to 20 trading days -- 60 days is a much slower signal
-# than the GMMA pattern itself (whose short EMA group reacts in ~3-15 days), so it was
-# frequently out of phase with an otherwise-good GMMA setup; 20 days sits closer to
-# the GMMA signal's own timescale.
+# direction. The LNAS/SNAS strategy shortened this from 60 to 20 trading days -- 60
+# days is a much slower signal than the GMMA pattern itself (whose short EMA group
+# reacts in ~3-15 days), so it was frequently out of phase with an otherwise-good GMMA
+# setup. Re-tuned against GEAR/BBOZ's own history and 20 days scored best again, so it
+# carries over unchanged.
 RS_LOOKBACK_DAYS = 20
 # Above-average liquidity: the candidate asset's own volume must be at least this
 # fraction of its trailing 20-day average (computed on the prior 20 sessions, not
-# including today) -- loosened from requiring it exceed the average outright (which a
-# literal coin-flip of sessions fails by construction) to a "not unusually thin"
-# threshold instead.
+# including today). The LNAS/SNAS strategy loosened this from requiring it exceed the
+# average outright (which a literal coin-flip of sessions fails by construction) to
+# 0.8x. Re-tuned down further to 0.5x on GEAR/BBOZ's own history -- a materially looser
+# "not extremely thin" bar than LNAS/SNAS needed.
 LIQUIDITY_LOOKBACK_DAYS = 20
-LIQUIDITY_MIN_RATIO = 0.8
+LIQUIDITY_MIN_RATIO = 0.5
 # Pullback, not an extended move: price must be within this band of the short EMA
 # group (both directions) to count as "pulled back near the group" rather than
-# already stretched away from it. Widened from 2.0% to give genuine pullback setups
-# more room before being classed as an extended/chasing entry.
-PULLBACK_MAX_EXTENSION_PCT = 3.5
+# already stretched away from it. The LNAS/SNAS strategy widened this from 2.0% to
+# 3.5%. Re-tuned tighter to 1.5% on GEAR/BBOZ's own history -- the ASX 200's own
+# GMMA pullbacks scored best resolved close to the short EMA group, not stretched
+# as far from it as LNAS/SNAS's Nasdaq-driven setups tolerated.
+PULLBACK_MAX_EXTENSION_PCT = 1.5
 
 # Volatility regime override, independent of the BBOZ gate above, applied regardless
 # of what the trend/BBOZ signal says. Added after the long-biased (always-invested)
@@ -302,11 +322,20 @@ PULLBACK_MAX_EXTENSION_PCT = 3.5
 # only reached for sessions where price has already reclaimed the 20-day MA (i.e. it
 # can no longer itself force the short product -- only the reversal-underway long call
 # survives from it).
-REALIZED_VOL_LOOKBACK_DAYS = 10    # ~2 trading weeks: "current" volatility
-VOL_BASELINE_LOOKBACK_DAYS = 60    # ~3 months: what's "normal" for this instrument lately
-VOL_SPIKE_MULTIPLIER = 1.5         # override triggers once current vol exceeds 1.5x its own baseline
-VOL_REGIME_MA_DAYS = 50            # price vs. this MA decides which direction the elevated-vol override takes
-SHORT_TERM_MA_DAYS = 20            # crossed below VOL_REGIME_MA_DAYS -> bearish regime; price back above it -> reversal underway
+# These five thresholds were re-tuned in a second pass (Stage B of scripts/tune.py),
+# fixing the Stage A filter values above and sweeping the volatility/MA overrides
+# against GEAR/BBOZ's own history. This second pass is what actually turned the mean
+# walk-forward return positive: -11.78% (Stage A alone) -> +4.71% (both stages
+# combined), and win rate 47.07% -> 48.75%, across the same 8 windows -- see
+# scripts/tuning_report.json for the full grid. All five moved off their LNAS/SNAS
+# values; VOL_REGIME_MA_DAYS and SHORT_TERM_MA_DAYS in particular came down
+# substantially, meaning the ASX 200's own trend/volatility regime resolves faster
+# than the Nasdaq's did for this same mechanism.
+REALIZED_VOL_LOOKBACK_DAYS = 15    # ~3 trading weeks: "current" volatility (was 10)
+VOL_BASELINE_LOOKBACK_DAYS = 60    # ~3 months: what's "normal" for this instrument lately (unchanged)
+VOL_SPIKE_MULTIPLIER = 1.3         # override triggers once current vol exceeds 1.3x its own baseline (was 1.5x)
+VOL_REGIME_MA_DAYS = 30            # price vs. this MA decides which direction the elevated-vol override takes (was 50)
+SHORT_TERM_MA_DAYS = 10            # crossed below VOL_REGIME_MA_DAYS -> bearish regime; price back above it -> reversal underway (was 20)
 
 DAILY_FETCH_PERIOD = "10y"      # generous; yfinance returns whatever's actually available
 # Yahoo's own intraday retention is interval-dependent, not a yfinance-imposed limit:
