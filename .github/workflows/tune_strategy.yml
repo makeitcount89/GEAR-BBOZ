@@ -45,4 +45,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update parameter tuning report [skip ci]"
-          git push
+          # The sweep can run long enough for another workflow (e.g. run_strategy.yml,
+          # triggered by the same push) to have already pushed to this branch --
+          # rebase onto whatever's there now rather than failing outright.
+          for i in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME" && git rebase "origin/$GITHUB_REF_NAME" && git push && break
+            echo "push/rebase attempt $i failed, retrying..."
+            sleep 5
+          done
