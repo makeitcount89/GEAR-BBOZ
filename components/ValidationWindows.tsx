@@ -32,7 +32,7 @@ export default function ValidationWindows({
       </p>
 
       {summary && windows.length > 1 && (
-        <dl className="mt-4 grid grid-cols-2 gap-4 border-t border-base-700 pt-4 text-sm sm:grid-cols-3 lg:grid-cols-6">
+        <dl className="mt-4 grid grid-cols-2 gap-4 border-t border-base-700 pt-4 text-sm sm:grid-cols-3 lg:grid-cols-8">
           <div>
             <dt className="text-xs text-[var(--text-muted)]">Mean Win Rate (± stddev)</dt>
             <dd className="tabular font-medium">
@@ -76,11 +76,28 @@ export default function ValidationWindows({
               {summary.windowsBeatingBuyHoldAxjo ?? 0} / {windows.length}
             </dd>
           </div>
+          <div>
+            <dt className="text-xs text-[var(--text-muted)]">Mean Sharpe Ratio</dt>
+            <dd
+              className={cn(
+                "tabular font-medium",
+                (summary.meanSharpeRatio ?? 0) >= 0 ? "text-[var(--status-good)]" : "text-[var(--status-critical)]"
+              )}
+            >
+              {summary.meanSharpeRatio?.toFixed(2)}
+            </dd>
+          </div>
+          <div>
+            <dt className="text-xs text-[var(--text-muted)]">Mean / Worst Max Drawdown</dt>
+            <dd className="tabular font-medium">
+              -{summary.meanMaxDrawdownPct?.toFixed(1)}% <span className="text-[var(--text-muted)]">/ -{summary.worstMaxDrawdownPct?.toFixed(1)}%</span>
+            </dd>
+          </div>
         </dl>
       )}
 
       <div className="mt-4 overflow-auto rounded-lg border border-base-700">
-        <table className="w-full min-w-[1120px] border-collapse text-sm">
+        <table className="w-full min-w-[1320px] border-collapse text-sm">
           <thead className="bg-base-800 text-xs text-[var(--text-muted)]">
             <tr>
               <th className="px-3 py-2 text-left font-medium">Window</th>
@@ -91,6 +108,8 @@ export default function ValidationWindows({
               <th className="px-3 py-2 text-right font-medium">GEAR</th>
               <th className="px-3 py-2 text-right font-medium">BBOZ</th>
               <th className="px-3 py-2 text-right font-medium">Return</th>
+              <th className="px-3 py-2 text-right font-medium">Sharpe</th>
+              <th className="px-3 py-2 text-right font-medium">Max DD</th>
               <th className="px-3 py-2 text-right font-medium">B&amp;H GEAR</th>
               <th className="px-3 py-2 text-center font-medium">Beats B&amp;H GEAR</th>
               <th className="px-3 py-2 text-right font-medium">B&amp;H ^AXJO</th>
@@ -121,6 +140,15 @@ export default function ValidationWindows({
                 >
                   {formatPct(w.totalReturnPct, { signed: true })}
                 </td>
+                <td
+                  className={cn(
+                    "px-3 py-2 text-right tabular",
+                    w.sharpeRatio >= 0 ? "text-[var(--status-good)]" : "text-[var(--status-critical)]"
+                  )}
+                >
+                  {w.sharpeRatio.toFixed(2)}
+                </td>
+                <td className="px-3 py-2 text-right tabular text-[var(--text-secondary)]">-{w.maxDrawdownPct.toFixed(1)}%</td>
                 <td className="px-3 py-2 text-right tabular text-[var(--text-secondary)]">
                   {formatPct(w.buyHoldGearReturnPct, { signed: true })}
                 </td>

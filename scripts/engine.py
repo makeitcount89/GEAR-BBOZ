@@ -347,6 +347,18 @@ DAILY_FETCH_PERIOD = "10y"      # generous; yfinance returns whatever's actually
 INTRADAY_FETCH_PERIOD = "730d"
 INTRADAY_INTERVAL = "60m"
 
+# Zero-brokerage does not mean zero-cost: the bid-ask spread is a real cost paid on
+# every trade regardless of commission, and BetaShares' own product documentation for
+# GEAR/BBOZ explicitly notes published returns don't reflect it. Neither ticker's own
+# live spread is available to this engine (no order-book access, only OHLCV), so this
+# is a disclosed, conservative estimate rather than an observed figure: leveraged/
+# inverse ETFs generally trade wider than plain index ETFs (commonly cited around
+# 10-20+ bps one-way, vs. 1-2 bps for something like SPY); 0.20% one-way is within
+# that range without assuming an unrealistically tight market. Charged once (one-way)
+# on ENTER (a single buy from flat) and twice (one-way each direction) on FLIP (a sell
+# and a buy), never on HOLD (no trade placed).
+SPREAD_COST_PCT = 0.20
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = REPO_ROOT / "public" / "strategy_data.json"
 
@@ -386,6 +398,7 @@ class LedgerEntry:
     axjo_price: float  # ^AXJO price at realization -- the unleveraged buy-and-hold reference point
     axjo_price_at_decision: float  # ^AXJO price when this decision was made, before its own interval
     interval_return_pct: float
+    spread_cost_pct: float  # bid-ask spread drag charged this session (0 on HOLD)
     portfolio_value_before: float
     portfolio_value_after: float
     cumulative_return_pct: float
@@ -433,18 +446,42 @@ def fetch_underlying_daily() -> pd.DataFrame:
     raise RuntimeError(f"Could not fetch underlying index data from any ticker: {last_exc}")
 
 
+# Corporate actions confirmed via ASX announcements/BetaShares notices but not present
+# in Yahoo's own `.splits` data for these tickers. Each entry follows yfinance's own
+# convention (ratio = new units per old unit, so a 10-for-1 consolidation is 0.1, a
+# 2-for-1 forward split would be 2.0). BBOZ.AX underwent a 10:1 unit consolidation
+# effective 30 May 2024 (units resumed trading under BBOZ on 11 June 2024) -- this
+# engine's own desplit_session_prices residual safety net had already been catching
+# and correcting the resulting ~10.35x single-interval jump as an "unexplained scale
+# discontinuity" before this was confirmed as a real, known corporate action; listing
+# it explicitly here lets apply_split_adjustment handle it precisely instead.
+KNOWN_SPLITS_SUPPLEMENT: dict[str, dict[str, float]] = {
+    "BBOZ.AX": {"2024-05-30": 0.1},
+}
+
+
 def fetch_splits(ticker: str) -> pd.Series:
     """Yahoo's recorded split ratios (ex-date -> ratio, e.g. 2.0 for a 2-for-1 split)
-    for precise, surgical price adjustment -- see apply_split_adjustment."""
+    for precise, surgical price adjustment -- see apply_split_adjustment. Supplemented
+    with KNOWN_SPLITS_SUPPLEMENT for confirmed corporate actions Yahoo doesn't carry."""
     try:
         splits = yf.Ticker(ticker).splits
     except Exception as exc:  # noqa: BLE001
         print(f"[engine] splits fetch failed for {ticker}: {exc}")
-        return pd.Series(dtype=float)
-    if splits is None or splits.empty:
-        return pd.Series(dtype=float)
-    if splits.index.tz is not None:
+        splits = pd.Series(dtype=float)
+    if splits is None:
+        splits = pd.Series(dtype=float)
+    if not splits.empty and splits.index.tz is not None:
         splits.index = splits.index.tz_localize(None)
+
+    known_dates = {pd.Timestamp(d).normalize() for d in splits.index} if not splits.empty else set()
+    extra = {
+        pd.Timestamp(date_str): ratio
+        for date_str, ratio in KNOWN_SPLITS_SUPPLEMENT.get(ticker, {}).items()
+        if pd.Timestamp(date_str).normalize() not in known_dates
+    }
+    if extra:
+        splits = pd.concat([splits, pd.Series(extra)]).sort_index()
     return splits
 
 
@@ -913,13 +950,22 @@ class RawDecision:
     price_source: str
 
 
+SPREAD_TRADES_BY_ACTION = {"ENTER": 1, "FLIP": 2, "HOLD": 0, "EXIT": 1, "CASH": 0}
+
+
 def simulate_window(decisions: list[RawDecision]) -> list[LedgerEntry]:
-    """Independent $500-seeded portfolio simulation over one window's decisions."""
+    """Independent $500-seeded portfolio simulation over one window's decisions.
+    Charges the bid-ask spread (SPREAD_COST_PCT) against the pre-interval portfolio
+    value whenever a trade is actually placed -- once for ENTER (a single buy from
+    flat), twice for FLIP (a sell and a buy), never for HOLD -- before that session's
+    price return compounds on top."""
     ledger: list[LedgerEntry] = []
     portfolio_value = INITIAL_CAPITAL
     for d in decisions:
         value_before = portfolio_value
-        portfolio_value = portfolio_value * (1.0 + d.applied_return)
+        spread_cost_pct = SPREAD_TRADES_BY_ACTION.get(d.action, 0) * SPREAD_COST_PCT
+        after_cost = value_before * (1.0 - spread_cost_pct / 100.0)
+        portfolio_value = after_cost * (1.0 + d.applied_return)
         cumulative_return_pct = (portfolio_value / INITIAL_CAPITAL - 1.0) * 100.0
         ledger.append(
             LedgerEntry(
@@ -939,6 +985,7 @@ def simulate_window(decisions: list[RawDecision]) -> list[LedgerEntry]:
                 axjo_price=round(d.axjo_price, 4),
                 axjo_price_at_decision=round(d.axjo_price_at_decision, 4),
                 interval_return_pct=round(d.applied_return * 100.0, 4),
+                spread_cost_pct=round(spread_cost_pct, 4),
                 portfolio_value_before=round(value_before, 4),
                 portfolio_value_after=round(portfolio_value, 4),
                 cumulative_return_pct=round(cumulative_return_pct, 4),
@@ -1257,6 +1304,38 @@ def compute_asset_breakdown(ledger: list[LedgerEntry]) -> dict:
     return out
 
 
+def compute_risk_metrics(ledger: list[LedgerEntry]) -> dict:
+    """Risk-adjusted view alongside raw return -- a return figure alone can't tell a
+    genuinely improved strategy apart from one that just took on more risk. Sharpe
+    uses each session's actual portfolio return (portfolio_value_after /
+    portfolio_value_before - 1), which already nets out the spread cost charged in
+    simulate_window, annualized by SESSIONS_PER_WEEK * 52 sessions/year; a 0% risk-free
+    rate is assumed for simplicity (reasonable near-term, understates Sharpe somewhat
+    in a higher-cash-rate environment). Max drawdown is the largest peak-to-trough
+    decline in the equity curve within the window, reported as a positive percentage."""
+    if not ledger:
+        return {"sharpeRatio": 0.0, "maxDrawdownPct": 0.0}
+
+    session_returns = [e.portfolio_value_after / e.portfolio_value_before - 1.0 for e in ledger]
+    mean_r = sum(session_returns) / len(session_returns)
+    if len(session_returns) >= 2:
+        variance = sum((r - mean_r) ** 2 for r in session_returns) / (len(session_returns) - 1)
+        std_r = math.sqrt(variance)
+    else:
+        std_r = 0.0
+    sessions_per_year = SESSIONS_PER_WEEK * 52
+    sharpe = (mean_r / std_r) * math.sqrt(sessions_per_year) if std_r > 0 else 0.0
+
+    peak = INITIAL_CAPITAL
+    max_drawdown = 0.0
+    for e in ledger:
+        peak = max(peak, e.portfolio_value_after)
+        drawdown = (e.portfolio_value_after - peak) / peak
+        max_drawdown = min(max_drawdown, drawdown)
+
+    return {"sharpeRatio": round(sharpe, 3), "maxDrawdownPct": round(abs(max_drawdown) * 100.0, 2)}
+
+
 def compute_metrics(ledger: list[LedgerEntry]) -> dict:
     if not ledger:
         return {
@@ -1277,6 +1356,8 @@ def compute_metrics(ledger: list[LedgerEntry]) -> dict:
             "beatBuyHoldGear": False,
             "buyHoldAxjoReturnPct": 0.0,
             "beatBuyHoldAxjo": False,
+            "sharpeRatio": 0.0,
+            "maxDrawdownPct": 0.0,
         }
 
     # Cash sessions are a deliberate sit-out (0% by construction), not a trade outcome --
@@ -1333,6 +1414,7 @@ def compute_metrics(ledger: list[LedgerEntry]) -> dict:
         "beatBuyHoldGear": total_return_pct > buy_hold_return_pct,
         "buyHoldAxjoReturnPct": buy_hold_axjo_return_pct,
         "beatBuyHoldAxjo": total_return_pct > buy_hold_axjo_return_pct,
+        **compute_risk_metrics(ledger),
     }
 
 
@@ -1360,6 +1442,8 @@ def summarize_validation_windows(windows: list[dict]) -> dict:
     windows_beating_buy_hold = sum(1 for w in windows if w["beatBuyHoldGear"])
     buy_hold_axjo_return_pcts = [w["buyHoldAxjoReturnPct"] for w in windows]
     windows_beating_buy_hold_axjo = sum(1 for w in windows if w["beatBuyHoldAxjo"])
+    sharpe_ratios = [w["sharpeRatio"] for w in windows]
+    max_drawdown_pcts = [w["maxDrawdownPct"] for w in windows]
 
     return {
         "windowsEvaluated": len(windows),
@@ -1371,6 +1455,9 @@ def summarize_validation_windows(windows: list[dict]) -> dict:
         "windowsBeatingBuyHoldGear": windows_beating_buy_hold,
         "meanBuyHoldAxjoReturnPct": round(mean(buy_hold_axjo_return_pcts), 2),
         "windowsBeatingBuyHoldAxjo": windows_beating_buy_hold_axjo,
+        "meanSharpeRatio": round(mean(sharpe_ratios), 3),
+        "meanMaxDrawdownPct": round(mean(max_drawdown_pcts), 2),
+        "worstMaxDrawdownPct": round(max(max_drawdown_pcts), 2) if max_drawdown_pcts else 0.0,
     }
 
 
@@ -1407,6 +1494,7 @@ def ledger_to_dicts(ledger: list[LedgerEntry]) -> list[dict]:
                 "gearPrice": e.gear_price,
                 "bbozPrice": e.bboz_price,
                 "intervalReturnPct": e.interval_return_pct,
+                "spreadCostPct": e.spread_cost_pct,
                 "portfolioValueBefore": e.portfolio_value_before,
                 "portfolioValueAfter": e.portfolio_value_after,
                 "cumulativeReturnPct": e.cumulative_return_pct,

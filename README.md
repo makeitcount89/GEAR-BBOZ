@@ -61,12 +61,17 @@ app/api/workflow-status/route.ts   Serverless proxy to the GitHub Actions REST A
    using Yahoo's own recorded split ratios (`yf.Ticker(...).splits`), applying exactly
    the known ratio rather than trusting yfinance's opaque combined split+dividend
    `auto_adjust`, which was observed in practice to still miss a very recent split and
-   to introduce its own boundary artifact adjusting an older one. A residual, model-free
-   safety net (`desplit_session_prices`) catches anything still implausible for a
-   geared/inverse-geared ASX 200 product (>30% in one interval) — a split Yahoo hasn't recorded
-   yet, or a genuinely unexplained data artifact — and logs it explicitly as
-   "unexplained" for a human to double check, since by this point a known split isn't
-   the likely cause.
+   to introduce its own boundary artifact adjusting an older one. `KNOWN_SPLITS_SUPPLEMENT`
+   in `engine.py` adds confirmed corporate actions Yahoo's own `.splits` data doesn't
+   carry — BBOZ.AX's 10:1 unit consolidation effective 30 May 2024 (confirmed via ASX
+   announcements) is listed explicitly there, since this engine's own residual safety
+   net (`desplit_session_prices`, below) was catching and correcting the resulting
+   ~10.35x jump as an "unexplained scale discontinuity" before that consolidation was
+   confirmed as real. That residual, model-free safety net still catches anything
+   still implausible for a geared/inverse-geared ASX 200 product (>30% in one
+   interval) — a split neither Yahoo nor `KNOWN_SPLITS_SUPPLEMENT` has recorded yet, or
+   a genuinely unexplained data artifact — and logs it explicitly as "unexplained" for
+   a human to double check, since by this point a known split isn't the likely cause.
 5. **Feature engineering — Guppy Multiple Moving Average (GMMA).** Three features,
    computed on the non-leveraged reference index: a short ("trader") EMA group
    (spans 3/5/8/10/12/15) and a long ("investor") EMA group (spans 30/35/40/45/50/60).
@@ -288,7 +293,35 @@ app/api/workflow-status/route.ts   Serverless proxy to the GitHub Actions REST A
    dashboard both show, window by window, whether the strategy is actually
    outperforming either passive alternative or just adding trading complexity (and,
    for BBOZ, leveraged short exposure) for a similar or worse outcome.
-12. **Output** — `public/strategy_data.json`: live signal, portfolio metrics, the full
+12. **Trading cost realism.** GEAR/BBOZ's own management fees are already reflected in
+   the real historical unit prices this engine backtests on (NAV performance is net of
+   fees), so no separate fee drag is modelled. What zero-brokerage *doesn't* cover is
+   the bid-ask spread, a real cost regardless of commission — `SPREAD_COST_PCT` (0.20%
+   one-way, a disclosed conservative estimate for a leveraged/inverse ETF pair, not an
+   observed live spread) is charged against portfolio value on every `ENTER` (one
+   trade) and `FLIP` (two trades: sell + buy), never on `HOLD`. Each ledger row reports
+   `spreadCostPct` so the cost drag is auditable per session, not just baked silently
+   into the return.
+13. **Risk-adjusted metrics, not just raw return.** A return figure alone can't tell a
+   genuinely improved strategy apart from one that just took on more risk. Every
+   window (and the main portfolio) also reports `sharpeRatio` (annualized off each
+   session's actual, cost-inclusive portfolio return, 0% risk-free rate assumed) and
+   `maxDrawdownPct` (largest peak-to-trough equity decline within the window), rolled
+   up across windows into `meanSharpeRatio`/`meanMaxDrawdownPct`/`worstMaxDrawdownPct`.
+14. **Parameter tuning methodology (`scripts/tune.py`) — train/holdout split, not
+   fit-and-report-on-the-same-data.** An earlier version of this sweep scored every
+   candidate parameter set on the same ~8 walk-forward windows the dashboard then
+   reported performance on — with this many tunable thresholds and only 8 windows,
+   that's a real overfitting risk, not a hypothetical one. The sweep now holds out the
+   most recent 2 windows entirely: every candidate is scored only on the older
+   ("tuning") windows, and the winning parameters are evaluated once, cold, against
+   the holdout windows the search never touched. The holdout number is the honest
+   read on whether a change generalizes; the tuning number mainly confirms the search
+   itself worked. The optimization objective is mean Sharpe ratio on the tuning
+   windows (risk-adjusted), not raw mean return. See `scripts/tuning_report.json` for
+   the full grid, per-stage winners, and a neighbor-robustness check (whether nearby
+   grid points also perform reasonably, vs. the winner being an isolated lucky point).
+15. **Output** — `public/strategy_data.json`: live signal, portfolio metrics, the full
    ledger, a chart-ready equity series, and the multi-window validation summary.
 
 ### Pipeline: `.github/workflows/run_strategy.yml`

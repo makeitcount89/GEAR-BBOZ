@@ -78,6 +78,8 @@ export interface PortfolioMetrics {
   beatBuyHoldGear: boolean;
   buyHoldAxjoReturnPct: number;
   beatBuyHoldAxjo: boolean;
+  sharpeRatio: number;
+  maxDrawdownPct: number;
 }
 
 export interface LedgerRow {
@@ -94,6 +96,7 @@ export interface LedgerRow {
   gearPrice: number;
   bbozPrice: number;
   intervalReturnPct: number;
+  spreadCostPct: number;
   portfolioValueBefore: number;
   portfolioValueAfter: number;
   cumulativeReturnPct: number;
@@ -122,6 +125,9 @@ export interface ValidationSummary {
   windowsBeatingBuyHoldGear?: number;
   meanBuyHoldAxjoReturnPct?: number;
   windowsBeatingBuyHoldAxjo?: number;
+  meanSharpeRatio?: number;
+  meanMaxDrawdownPct?: number;
+  worstMaxDrawdownPct?: number;
 }
 
 export interface Validation {

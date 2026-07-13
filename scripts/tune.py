@@ -19,16 +19,21 @@ right for this instrument?) and BBOZ dominating the dollar losses via the
 override-forced entries (Stage B: are the override thresholds forcing BBOZ too
 often or too readily for the ASX 200's own volatility/trend regime?).
 
-Every candidate is scored on the exact same walk-forward validation windows the
-dashboard itself reports (no separate held-out test set -- with only ~8 non-
-overlapping windows of real history, carving out a further split would leave too
-little of either to trust). That means this sweep is *fitting* to the same windows
-whose scores it reports, a real overfitting risk flagged here rather than hidden:
-the report includes each candidate's return-vs-stddev trade-off and how many windows
-it beats buy-and-hold, and prefers candidates whose immediate neighbors in the grid
-also perform reasonably (a crude but real robustness check against picking a single
-lucky grid point), but the final choice still deserves a skeptical read against
-future live sessions, not blind trust.
+TRAIN/HOLDOUT SPLIT -- the key fix versus this script's first version. With only ~8
+non-overlapping walk-forward windows of real history, fitting parameters to the same
+windows the dashboard then reports on is genuine overfitting risk, not a hypothetical
+one: given enough parameter combinations, *something* will look good on any fixed set
+of 8 windows purely by chance. So every candidate is scored only on the older windows
+(TUNING windows; the most recent HOLDOUT_WINDOW_COUNT windows are never touched during
+the sweep), and the winning parameters are then evaluated once, cold, against the
+holdout windows the search never saw. The holdout number is the one that actually
+tells you whether this generalizes -- the tuning-set number only tells you the search
+worked, which it always will.
+
+The optimization objective is mean Sharpe ratio on the tuning windows (risk-adjusted),
+not raw mean return -- a wilder but sometimes-lucky parameter set isn't an improvement,
+and chasing raw return with no risk penalty is exactly how you end up with a curve-fit
+strategy that looks great until the first regime it wasn't fit to.
 
 Usage: python scripts/tune.py    (writes scripts/tuning_report.json)
 """
@@ -38,7 +43,6 @@ from __future__ import annotations
 import itertools
 import json
 import sys
-from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
 
@@ -48,38 +52,44 @@ import engine  # noqa: E402
 
 REPORT_PATH = SCRIPT_DIR / "tuning_report.json"
 
+# The most recent N windows are held out of every sweep score -- never optimized
+# against, only evaluated once at the end against the winning parameters. 2 of the
+# real ~8 windows is a small holdout, but holding out more leaves too few tuning
+# windows to search against at all; this is a real constraint of a young, short-
+# history instrument pair, not a stylistic choice.
+HOLDOUT_WINDOW_COUNT = 2
 
-def evaluate() -> dict:
+
+def run_backtest() -> list[dict]:
     """Run engine's own walk-forward backtest under whatever parameter values are
-    currently patched onto the engine module, and return its validation summary
-    plus the full per-window breakdown."""
+    currently patched onto the engine module; returns validation_windows, most
+    recent first (index 0 is the most recent window)."""
     result = engine.walk_forward_backtest(
         SESSIONS, UNDERLYING_DAILY, GEAR_DAILY, BBOZ_DAILY
     )
-    summary = engine.summarize_validation_windows(result.validation_windows)
-    return {
-        "summary": summary,
-        "windows": [
-            {
-                "windowIndex": w["windowIndex"],
-                "totalReturnPct": w["totalReturnPct"],
-                "winRatePct": w["winRatePct"],
-                "beatBuyHoldGear": w["beatBuyHoldGear"],
-            }
-            for w in result.validation_windows
-        ],
-    }
+    return result.validation_windows
 
 
-def score(evaluation: dict) -> float:
-    """Prefer high mean return, penalize instability across windows -- a simple
-    risk-adjusted objective rather than raw mean return alone, since a wilder
-    but-sometimes-lucky parameter set isn't actually what "improve the model"
-    should mean with only 8 windows of evidence."""
-    s = evaluation["summary"]
-    if s.get("windowsEvaluated", 0) == 0:
+def split_windows(windows: list[dict]) -> tuple[list[dict], list[dict]]:
+    """(tuning_windows, holdout_windows) -- holdout is the most recent
+    HOLDOUT_WINDOW_COUNT windows (index 0..N-1), tuning is everything older."""
+    holdout = windows[:HOLDOUT_WINDOW_COUNT]
+    tuning = windows[HOLDOUT_WINDOW_COUNT:]
+    return tuning, holdout
+
+
+def summarize(windows: list[dict]) -> dict:
+    return engine.summarize_validation_windows(windows)
+
+
+def score(tuning_summary: dict) -> float:
+    """Risk-adjusted: mean Sharpe ratio on the tuning windows only. Ties broken by
+    mean return so two candidates with a similar Sharpe don't get picked arbitrarily."""
+    if tuning_summary.get("windowsEvaluated", 0) == 0:
         return float("-inf")
-    return s.get("meanTotalReturnPct", 0.0) - 0.5 * s.get("stdDevTotalReturnPct", 0.0)
+    sharpe = tuning_summary.get("meanSharpeRatio", 0.0)
+    tie_break = tuning_summary.get("meanTotalReturnPct", 0.0) / 1000.0  # negligible vs sharpe
+    return sharpe + tie_break
 
 
 def apply_params(params: dict) -> None:
@@ -92,7 +102,7 @@ def sweep(param_grid: dict, fixed: dict, label: str) -> list[dict]:
     keys = list(param_grid.keys())
     combos = list(itertools.product(*param_grid.values()))
     print(f"[tune] {label}: evaluating {len(combos)} combinations "
-          f"over {keys}", flush=True)
+          f"over {keys} (scored on tuning windows only)", flush=True)
     results = []
     for i, combo in enumerate(combos):
         params = dict(zip(keys, combo))
@@ -101,11 +111,17 @@ def sweep(param_grid: dict, fixed: dict, label: str) -> list[dict]:
                 continue  # "short" MA must actually be shorter than the "regime" MA
         apply_params(params)
         try:
-            ev = evaluate()
+            windows = run_backtest()
         except Exception as exc:  # noqa: BLE001
             print(f"[tune]   combo {params} failed: {exc}")
             continue
-        results.append({"params": params, "score": score(ev), **ev})
+        tuning_windows, holdout_windows = split_windows(windows)
+        tuning_summary = summarize(tuning_windows)
+        results.append({
+            "params": params,
+            "score": score(tuning_summary),
+            "tuningSummary": tuning_summary,
+        })
         if (i + 1) % 50 == 0:
             print(f"[tune]   ...{i + 1}/{len(combos)}", flush=True)
     results.sort(key=lambda r: r["score"], reverse=True)
@@ -163,10 +179,14 @@ def main() -> None:
         "VOL_REGIME_MA_DAYS": engine.VOL_REGIME_MA_DAYS,
         "SHORT_TERM_MA_DAYS": engine.SHORT_TERM_MA_DAYS,
     }
-    print("[tune] baseline (LNAS/SNAS-carried-over) parameters:", baseline_params)
+    print("[tune] baseline (current engine.py) parameters:", baseline_params)
     apply_params(baseline_params)
-    baseline_eval = evaluate()
-    print("[tune] baseline summary:", baseline_eval["summary"])
+    baseline_windows = run_backtest()
+    baseline_tuning, baseline_holdout = split_windows(baseline_windows)
+    baseline_tuning_summary = summarize(baseline_tuning)
+    baseline_holdout_summary = summarize(baseline_holdout)
+    print("[tune] baseline tuning-set summary:", baseline_tuning_summary)
+    print("[tune] baseline holdout summary:", baseline_holdout_summary)
 
     # ---- Stage A: BBOZ-gate confirmation filters -----------------------------
     stage_a_grid = {
@@ -185,7 +205,7 @@ def main() -> None:
     stage_a_results = sweep(stage_a_grid, stage_a_fixed, "Stage A (BBOZ-gate filters)")
     stage_a_winner = stage_a_results[0]
     print(f"[tune] Stage A winner: {stage_a_winner['params']} "
-          f"score={stage_a_winner['score']:.2f} summary={stage_a_winner['summary']}")
+          f"score={stage_a_winner['score']:.3f} tuningSummary={stage_a_winner['tuningSummary']}")
 
     # ---- Stage B: volatility / MA override thresholds ------------------------
     stage_b_grid = {
@@ -199,24 +219,40 @@ def main() -> None:
     stage_b_results = sweep(stage_b_grid, stage_b_fixed, "Stage B (volatility/MA overrides)")
     stage_b_winner = stage_b_results[0]
     print(f"[tune] Stage B winner: {stage_b_winner['params']} "
-          f"score={stage_b_winner['score']:.2f} summary={stage_b_winner['summary']}")
+          f"score={stage_b_winner['score']:.3f} tuningSummary={stage_b_winner['tuningSummary']}")
 
     final_params = {**stage_a_winner["params"], **stage_b_winner["params"]}
     apply_params(final_params)
-    final_eval = evaluate()
+    final_windows = run_backtest()
+    final_tuning, final_holdout = split_windows(final_windows)
+    final_tuning_summary = summarize(final_tuning)
+    final_holdout_summary = summarize(final_holdout)
     print(f"[tune] FINAL combined parameters: {final_params}")
-    print(f"[tune] FINAL summary: {final_eval['summary']}")
+    print(f"[tune] FINAL tuning-set summary: {final_tuning_summary}")
+    print(f"[tune] FINAL holdout summary (never optimized against): {final_holdout_summary}")
 
     report = {
         "generatedAt": now_adelaide.isoformat(),
-        "caveats": (
-            "Greedy two-stage search (filters, then volatility/MA overrides), scored "
-            "on the same ~8 walk-forward windows the dashboard reports (no separate "
-            "holdout was available). Treat as a directionally-informed re-calibration "
-            "against GEAR/BBOZ's own history, not a guaranteed-optimal or "
-            "out-of-sample-validated result."
+        "methodology": (
+            f"Greedy two-stage search (filters, then volatility/MA overrides), scored "
+            f"by mean Sharpe ratio on the oldest windows only ('tuning'); the most "
+            f"recent {HOLDOUT_WINDOW_COUNT} windows ('holdout') were never touched "
+            f"during the sweep and are evaluated once at the end against the winning "
+            f"parameters. The holdout numbers are the honest read on whether this "
+            f"generalizes; the tuning numbers mainly confirm the search worked."
         ),
-        "baseline": {"params": baseline_params, **baseline_eval},
+        "caveats": (
+            "Still a small-sample re-calibration (a handful of tuning windows, "
+            f"{HOLDOUT_WINDOW_COUNT} holdout windows) on a young instrument pair -- "
+            "informative, not a guarantee. Backtest includes an estimated bid-ask "
+            "spread cost (SPREAD_COST_PCT in engine.py) but still assumes zero "
+            "brokerage and perfect fills at the resolved session price."
+        ),
+        "baseline": {
+            "params": baseline_params,
+            "tuningSummary": baseline_tuning_summary,
+            "holdoutSummary": baseline_holdout_summary,
+        },
         "stageA": {
             "grid": stage_a_grid,
             "fixed": stage_a_fixed,
@@ -229,7 +265,11 @@ def main() -> None:
             "top10": stage_b_results[:10],
             "robustness": robustness_note(stage_b_results, stage_b_winner, list(stage_b_grid.keys())),
         },
-        "final": {"params": final_params, **final_eval},
+        "final": {
+            "params": final_params,
+            "tuningSummary": final_tuning_summary,
+            "holdoutSummary": final_holdout_summary,
+        },
     }
     REPORT_PATH.write_text(json.dumps(report, indent=2))
     print(f"[tune] wrote {REPORT_PATH}")

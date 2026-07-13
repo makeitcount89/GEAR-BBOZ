@@ -1,4 +1,4 @@
-import { CircleDollarSign, LineChart, Percent, Scale, TrendingUp, Trophy, Wallet } from "lucide-react";
+import { Activity, CircleDollarSign, LineChart, Percent, Scale, TrendingDown, TrendingUp, Trophy, Wallet } from "lucide-react";
 import type { PortfolioMetrics } from "@/lib/types";
 import { formatCurrency, formatPct } from "@/lib/utils";
 import StatTile from "./StatTile";
@@ -6,7 +6,7 @@ import StatTile from "./StatTile";
 export default function PortfolioStats({ portfolio }: { portfolio: PortfolioMetrics }) {
   const positive = portfolio.totalReturnPct >= 0;
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-9">
       <StatTile
         label="Portfolio Value"
         value={formatCurrency(portfolio.currentValue)}
@@ -48,6 +48,18 @@ export default function PortfolioStats({ portfolio }: { portfolio: PortfolioMetr
         value={formatPct(portfolio.buyHoldAxjoReturnPct, { signed: true })}
         icon={<LineChart size={14} />}
         tone={portfolio.beatBuyHoldAxjo ? "good" : "bad"}
+      />
+      <StatTile
+        label="Sharpe Ratio"
+        value={portfolio.sharpeRatio.toFixed(2)}
+        icon={<Activity size={14} />}
+        tone={portfolio.sharpeRatio >= 0 ? "good" : "bad"}
+      />
+      <StatTile
+        label="Max Drawdown"
+        value={`-${portfolio.maxDrawdownPct.toFixed(1)}%`}
+        icon={<TrendingDown size={14} />}
+        tone={portfolio.maxDrawdownPct <= 15 ? "good" : "bad"}
       />
     </div>
   );
