@@ -1,0 +1,1644 @@
+{
+  "generatedAt": "2026-07-13T21:21:31.684647+09:30",
+  "caveats": "Greedy two-stage search (filters, then volatility/MA overrides), scored on the same ~8 walk-forward windows the dashboard reports (no separate holdout was available). Treat as a directionally-informed re-calibration against GEAR/BBOZ's own history, not a guaranteed-optimal or out-of-sample-validated result.",
+  "baseline": {
+    "params": {
+      "ALIGNMENT_MARGIN_PCT": 0.0,
+      "RS_LOOKBACK_DAYS": 20,
+      "LIQUIDITY_MIN_RATIO": 0.5,
+      "PULLBACK_MAX_EXTENSION_PCT": 1.5,
+      "REALIZED_VOL_LOOKBACK_DAYS": 15,
+      "VOL_BASELINE_LOOKBACK_DAYS": 60,
+      "VOL_SPIKE_MULTIPLIER": 1.3,
+      "VOL_REGIME_MA_DAYS": 30,
+      "SHORT_TERM_MA_DAYS": 10
+    },
+    "summary": {
+      "windowsEvaluated": 8,
+      "meanWinRatePct": 48.75,
+      "stdDevWinRatePct": 5.42,
+      "meanTotalReturnPct": 4.71,
+      "stdDevTotalReturnPct": 24.72,
+      "meanBuyHoldGearReturnPct": 9.5,
+      "windowsBeatingBuyHoldGear": 4,
+      "meanBuyHoldAxjoReturnPct": 5.17,
+      "windowsBeatingBuyHoldAxjo": 4
+    },
+    "windows": [
+      {
+        "windowIndex": 0,
+        "totalReturnPct": -4.9393,
+        "winRatePct": 46.15,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 1,
+        "totalReturnPct": 28.1109,
+        "winRatePct": 51.92,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 2,
+        "totalReturnPct": -17.6109,
+        "winRatePct": 44.23,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 3,
+        "totalReturnPct": 22.3634,
+        "winRatePct": 57.69,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 4,
+        "totalReturnPct": 4.62,
+        "winRatePct": 50.0,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 5,
+        "totalReturnPct": -33.9411,
+        "winRatePct": 40.38,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 6,
+        "totalReturnPct": 40.6582,
+        "winRatePct": 47.12,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 7,
+        "totalReturnPct": -1.5438,
+        "winRatePct": 52.5,
+        "beatBuyHoldGear": false
+      }
+    ]
+  },
+  "stageA": {
+    "grid": {
+      "ALIGNMENT_MARGIN_PCT": [
+        0.0,
+        0.05,
+        0.1,
+        0.2,
+        0.35
+      ],
+      "RS_LOOKBACK_DAYS": [
+        10,
+        15,
+        20,
+        30,
+        40
+      ],
+      "LIQUIDITY_MIN_RATIO": [
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        1.0
+      ],
+      "PULLBACK_MAX_EXTENSION_PCT": [
+        1.5,
+        2.0,
+        3.5,
+        5.0,
+        7.0
+      ]
+    },
+    "fixed": {
+      "REALIZED_VOL_LOOKBACK_DAYS": 15,
+      "VOL_BASELINE_LOOKBACK_DAYS": 60,
+      "VOL_SPIKE_MULTIPLIER": 1.3,
+      "VOL_REGIME_MA_DAYS": 30,
+      "SHORT_TERM_MA_DAYS": 10
+    },
+    "top10": [
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.5,
+          "PULLBACK_MAX_EXTENSION_PCT": 1.5
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.5,
+          "PULLBACK_MAX_EXTENSION_PCT": 2.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.5,
+          "PULLBACK_MAX_EXTENSION_PCT": 3.5
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.5,
+          "PULLBACK_MAX_EXTENSION_PCT": 5.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.5,
+          "PULLBACK_MAX_EXTENSION_PCT": 7.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.6,
+          "PULLBACK_MAX_EXTENSION_PCT": 1.5
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.6,
+          "PULLBACK_MAX_EXTENSION_PCT": 2.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.6,
+          "PULLBACK_MAX_EXTENSION_PCT": 3.5
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.6,
+          "PULLBACK_MAX_EXTENSION_PCT": 5.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "ALIGNMENT_MARGIN_PCT": 0.0,
+          "RS_LOOKBACK_DAYS": 15,
+          "LIQUIDITY_MIN_RATIO": 0.6,
+          "PULLBACK_MAX_EXTENSION_PCT": 7.0
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      }
+    ],
+    "robustness": "10/10 of the top-10 candidates share >=half the winner's parameter values"
+  },
+  "stageB": {
+    "grid": {
+      "REALIZED_VOL_LOOKBACK_DAYS": [
+        5,
+        10,
+        15
+      ],
+      "VOL_BASELINE_LOOKBACK_DAYS": [
+        45,
+        60,
+        90
+      ],
+      "VOL_SPIKE_MULTIPLIER": [
+        1.3,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "VOL_REGIME_MA_DAYS": [
+        30,
+        50,
+        100,
+        150
+      ],
+      "SHORT_TERM_MA_DAYS": [
+        10,
+        20,
+        30
+      ]
+    },
+    "fixed": {
+      "ALIGNMENT_MARGIN_PCT": 0.0,
+      "RS_LOOKBACK_DAYS": 15,
+      "LIQUIDITY_MIN_RATIO": 0.5,
+      "PULLBACK_MAX_EXTENSION_PCT": 1.5
+    },
+    "top10": [
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 15,
+          "VOL_BASELINE_LOOKBACK_DAYS": 60,
+          "VOL_SPIKE_MULTIPLIER": 1.3,
+          "VOL_REGIME_MA_DAYS": 30,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -7.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.43,
+          "meanTotalReturnPct": 5.43,
+          "stdDevTotalReturnPct": 25.04,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 4,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 4
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": -4.9393,
+            "winRatePct": 46.15,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 28.1109,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -17.6109,
+            "winRatePct": 44.23,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 22.3634,
+            "winRatePct": 57.69,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -33.9411,
+            "winRatePct": 40.38,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 41.9925,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 5,
+          "VOL_BASELINE_LOOKBACK_DAYS": 60,
+          "VOL_SPIKE_MULTIPLIER": 2.0,
+          "VOL_REGIME_MA_DAYS": 150,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -7.660000000000001,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.11,
+          "stdDevWinRatePct": 5.34,
+          "meanTotalReturnPct": 5.64,
+          "stdDevTotalReturnPct": 26.6,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 14.173,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 11.0721,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.4388,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 10,
+          "VOL_BASELINE_LOOKBACK_DAYS": 60,
+          "VOL_SPIKE_MULTIPLIER": 1.3,
+          "VOL_REGIME_MA_DAYS": 30,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -7.845000000000001,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.35,
+          "stdDevWinRatePct": 5.2,
+          "meanTotalReturnPct": 3.43,
+          "stdDevTotalReturnPct": 22.55,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 9.8428,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 36.0668,
+            "winRatePct": 52.88,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -16.3052,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 12.7151,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 15.0031,
+            "winRatePct": 52.88,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -38.6474,
+            "winRatePct": 41.35,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 10.3284,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 10,
+          "VOL_BASELINE_LOOKBACK_DAYS": 45,
+          "VOL_SPIKE_MULTIPLIER": 1.3,
+          "VOL_REGIME_MA_DAYS": 30,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -7.865,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.23,
+          "stdDevWinRatePct": 5.25,
+          "meanTotalReturnPct": 4.25,
+          "stdDevTotalReturnPct": 24.23,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 7.3982,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 39.9714,
+            "winRatePct": 52.88,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -16.3052,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 12.7151,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 21.4984,
+            "winRatePct": 52.88,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -40.0329,
+            "winRatePct": 41.35,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 10.3284,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 5,
+          "VOL_BASELINE_LOOKBACK_DAYS": 60,
+          "VOL_SPIKE_MULTIPLIER": 2.0,
+          "VOL_REGIME_MA_DAYS": 100,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -7.909999999999999,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.99,
+          "stdDevWinRatePct": 5.28,
+          "meanTotalReturnPct": 5.37,
+          "stdDevTotalReturnPct": 26.56,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 14.173,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 10,
+          "VOL_BASELINE_LOOKBACK_DAYS": 90,
+          "VOL_SPIKE_MULTIPLIER": 1.3,
+          "VOL_REGIME_MA_DAYS": 30,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -8.04,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 48.87,
+          "stdDevWinRatePct": 5.51,
+          "meanTotalReturnPct": 2.58,
+          "stdDevTotalReturnPct": 21.24,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 5.8186,
+            "winRatePct": 48.08,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 36.0668,
+            "winRatePct": 52.88,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -16.3052,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 12.7151,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 9.0184,
+            "winRatePct": 50.96,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 10.3284,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.5438,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 5,
+          "VOL_BASELINE_LOOKBACK_DAYS": 45,
+          "VOL_SPIKE_MULTIPLIER": 3.0,
+          "VOL_REGIME_MA_DAYS": 150,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -8.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.23,
+          "stdDevWinRatePct": 5.32,
+          "meanTotalReturnPct": 5.14,
+          "stdDevTotalReturnPct": 26.46,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 10.1766,
+            "winRatePct": 49.04,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 11.0721,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.4388,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 5,
+          "VOL_BASELINE_LOOKBACK_DAYS": 60,
+          "VOL_SPIKE_MULTIPLIER": 3.0,
+          "VOL_REGIME_MA_DAYS": 150,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -8.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.23,
+          "stdDevWinRatePct": 5.32,
+          "meanTotalReturnPct": 5.14,
+          "stdDevTotalReturnPct": 26.46,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 10.1766,
+            "winRatePct": 49.04,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 11.0721,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.4388,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 5,
+          "VOL_BASELINE_LOOKBACK_DAYS": 90,
+          "VOL_SPIKE_MULTIPLIER": 3.0,
+          "VOL_REGIME_MA_DAYS": 150,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -8.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.23,
+          "stdDevWinRatePct": 5.32,
+          "meanTotalReturnPct": 5.14,
+          "stdDevTotalReturnPct": 26.46,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 10.1766,
+            "winRatePct": 49.04,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 11.0721,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.4388,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      },
+      {
+        "params": {
+          "REALIZED_VOL_LOOKBACK_DAYS": 10,
+          "VOL_BASELINE_LOOKBACK_DAYS": 45,
+          "VOL_SPIKE_MULTIPLIER": 3.0,
+          "VOL_REGIME_MA_DAYS": 150,
+          "SHORT_TERM_MA_DAYS": 10
+        },
+        "score": -8.09,
+        "summary": {
+          "windowsEvaluated": 8,
+          "meanWinRatePct": 49.23,
+          "stdDevWinRatePct": 5.32,
+          "meanTotalReturnPct": 5.14,
+          "stdDevTotalReturnPct": 26.46,
+          "meanBuyHoldGearReturnPct": 9.5,
+          "windowsBeatingBuyHoldGear": 5,
+          "meanBuyHoldAxjoReturnPct": 5.17,
+          "windowsBeatingBuyHoldAxjo": 5
+        },
+        "windows": [
+          {
+            "windowIndex": 0,
+            "totalReturnPct": 10.1766,
+            "winRatePct": 49.04,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 1,
+            "totalReturnPct": 45.221,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 2,
+            "totalReturnPct": -27.4214,
+            "winRatePct": 45.19,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 3,
+            "totalReturnPct": 25.4195,
+            "winRatePct": 56.73,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 4,
+            "totalReturnPct": 11.0721,
+            "winRatePct": 51.92,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 5,
+            "totalReturnPct": -35.4579,
+            "winRatePct": 39.42,
+            "beatBuyHoldGear": false
+          },
+          {
+            "windowIndex": 6,
+            "totalReturnPct": 13.5259,
+            "winRatePct": 47.12,
+            "beatBuyHoldGear": true
+          },
+          {
+            "windowIndex": 7,
+            "totalReturnPct": -1.4388,
+            "winRatePct": 52.5,
+            "beatBuyHoldGear": false
+          }
+        ]
+      }
+    ],
+    "robustness": "4/10 of the top-10 candidates share >=half the winner's parameter values"
+  },
+  "final": {
+    "params": {
+      "ALIGNMENT_MARGIN_PCT": 0.0,
+      "RS_LOOKBACK_DAYS": 15,
+      "LIQUIDITY_MIN_RATIO": 0.5,
+      "PULLBACK_MAX_EXTENSION_PCT": 1.5,
+      "REALIZED_VOL_LOOKBACK_DAYS": 15,
+      "VOL_BASELINE_LOOKBACK_DAYS": 60,
+      "VOL_SPIKE_MULTIPLIER": 1.3,
+      "VOL_REGIME_MA_DAYS": 30,
+      "SHORT_TERM_MA_DAYS": 10
+    },
+    "summary": {
+      "windowsEvaluated": 8,
+      "meanWinRatePct": 48.99,
+      "stdDevWinRatePct": 5.43,
+      "meanTotalReturnPct": 5.43,
+      "stdDevTotalReturnPct": 25.04,
+      "meanBuyHoldGearReturnPct": 9.5,
+      "windowsBeatingBuyHoldGear": 4,
+      "meanBuyHoldAxjoReturnPct": 5.17,
+      "windowsBeatingBuyHoldAxjo": 4
+    },
+    "windows": [
+      {
+        "windowIndex": 0,
+        "totalReturnPct": -4.9393,
+        "winRatePct": 46.15,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 1,
+        "totalReturnPct": 28.1109,
+        "winRatePct": 51.92,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 2,
+        "totalReturnPct": -17.6109,
+        "winRatePct": 44.23,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 3,
+        "totalReturnPct": 22.3634,
+        "winRatePct": 57.69,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 4,
+        "totalReturnPct": 9.0184,
+        "winRatePct": 50.96,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 5,
+        "totalReturnPct": -33.9411,
+        "winRatePct": 40.38,
+        "beatBuyHoldGear": false
+      },
+      {
+        "windowIndex": 6,
+        "totalReturnPct": 41.9925,
+        "winRatePct": 48.08,
+        "beatBuyHoldGear": true
+      },
+      {
+        "windowIndex": 7,
+        "totalReturnPct": -1.5438,
+        "winRatePct": 52.5,
+        "beatBuyHoldGear": false
+      }
+    ]
+  }
+}
