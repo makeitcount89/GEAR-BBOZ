@@ -1,0 +1,70 @@
+{
+  "generatedAt": null,
+  "status": "awaiting_first_run",
+  "meta": {
+    "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
+    "tickers": {
+      "long": "GEAR.AX",
+      "short": "BBOZ.AX",
+      "underlying": "^AXJO"
+    },
+    "model": {
+      "type": "k-NN",
+      "k": 3,
+      "distance": "euclidean (z-score standardized, inverse-distance-weighted vote)",
+      "classes": ["DOWN -> BBOZ", "FLAT -> CASH", "UP -> GEAR"],
+      "flatBandPct": 0.5,
+      "signalSetup": "Guppy Multiple Moving Average (GMMA) trend-continuation",
+      "features": [
+        "short EMA group (3,5,8,10,12,15) compression %",
+        "long EMA group (30,35,40,45,50,60) separation %",
+        "price vs short EMA group %"
+      ],
+      "filterGate": "GEAR is the default position; BBOZ is entered either via all 4 filters unanimous, or via the volatility regime override",
+      "filters": [
+        "[BBOZ gate] GMMA trend alignment (short/long EMA group centers ordered by >0.1% bearish)",
+        "[BBOZ gate] 20-day relative strength of the underlying is negative",
+        "[BBOZ gate] BBOZ.AX volume at least 80% of its trailing 20-day average",
+        "[BBOZ gate] pullback entry: price within 3.5% of the short EMA group, not an extended move"
+      ],
+      "volatilityGuard": "three overrides, independent of the BBOZ gate, checked every session in this order: (1) fast breakdown -- forces BBOZ immediately whenever price closes below its own 20-day MA, regardless of volatility regime or the 50-day MA; (2) failing that, 20-day MA vs 50-day MA crossover -- forces GEAR if the 20-day MA is still below the 50-day MA (price has reclaimed the 20-day MA, or (1) above would have fired instead); (3) failing that, whenever 10-day realized volatility exceeds 1.5x its own trailing 60-day baseline, forces BBOZ if price is above its 50-day MA (topping pattern), else forces GEAR (oversold bounce) -- no CASH state produced"
+    },
+    "rebalanceSchedule": "Tuesday & Friday",
+    "decisionCutoffLocal": "14:00 Australia/Adelaide",
+    "trainWindowWeeks": 104,
+    "holdoutWindowWeeks": 52,
+    "backtestWindowWeeks": 52,
+    "brokerageFees": 0.0,
+    "timezone": "Australia/Adelaide",
+    "knownSplits": {
+      "GEAR.AX": {},
+      "BBOZ.AX": {}
+    }
+  },
+  "liveSignal": null,
+  "portfolio": {
+    "initialCapital": 500.0,
+    "currentValue": 500.0,
+    "totalReturnPct": 0.0,
+    "totalTrades": 0,
+    "wins": 0,
+    "losses": 0,
+    "cashSessions": 0,
+    "winRatePct": 0.0,
+    "currentStreak": null,
+    "assetBreakdown": {
+      "GEAR": { "trades": 0, "wins": 0, "losses": 0, "winRatePct": 0.0, "dollarPnl": 0.0, "contributionPct": 0.0 },
+      "BBOZ": { "trades": 0, "wins": 0, "losses": 0, "winRatePct": 0.0, "dollarPnl": 0.0, "contributionPct": 0.0 }
+    },
+    "buyHoldGearReturnPct": 0.0,
+    "beatBuyHoldGear": false,
+    "buyHoldAxjoReturnPct": 0.0,
+    "beatBuyHoldAxjo": false
+  },
+  "ledger": [],
+  "chartSeries": [],
+  "validation": {
+    "windows": [],
+    "summary": { "windowsEvaluated": 0 }
+  }
+}

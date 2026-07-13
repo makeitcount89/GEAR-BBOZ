@@ -1,0 +1,56 @@
+name: Run GEAR/BBOZ Strategy Engine
+
+on:
+  # ASX 200 group products trade Tue/Fri per the rebalance schedule. The 2:00 PM
+  # Australia/Adelaide decision cutoff sits at different UTC offsets depending on
+  # daylight saving (ACST = UTC+9:30, roughly Apr-Oct; ACDT = UTC+10:30, roughly
+  # Oct-Apr), so both crons are scheduled ~15 minutes after the cutoff for their
+  # respective season. engine.py resolves the true local time itself via zoneinfo,
+  # so the "wrong season" run is a harmless no-op-ish re-check (it just falls back
+  # to the latest available intraday bar per its own cutoff logic).
+  schedule:
+    - cron: "45 4 * * 2,5"  # 14:15 ACST (UTC+9:30) - non-DST months
+    - cron: "45 3 * * 2,5"  # 14:15 ACDT (UTC+10:30) - DST months
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: run-strategy-engine
+  cancel-in-progress: false
+
+jobs:
+  run-engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run strategy engine
+        run: python scripts/engine.py
+
+      - name: Commit and push updated strategy data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- public/strategy_data.json; then
+            echo "No change in strategy_data.json, skipping commit."
+            exit 0
+          fi
+          git add public/strategy_data.json
+          git commit -m "chore: update strategy data [skip ci]"
+          git push
