@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-14T15:26:18.473509+09:30",
+  "generatedAt": "2026-07-14T16:27:39.596767+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -54,11 +54,11 @@
     "recommendedAsset": "GEAR",
     "action": "HOLD",
     "currentlyHolding": "GEAR",
-    "confidence": 0.6846,
+    "confidence": 0.6757,
     "features": {
-      "shortGroupCompressionPct": 0.0437,
-      "longGroupSeparationPct": 0.0572,
-      "priceVsShortGroupPct": 0.108
+      "shortGroupCompressionPct": 0.0451,
+      "longGroupSeparationPct": 0.0573,
+      "priceVsShortGroupPct": 0.1157
     },
     "filters": {
       "trendAlignment": {
@@ -67,7 +67,7 @@
       },
       "relativeStrength": {
         "pass": true,
-        "detail": "-1.23% vs required < 0%"
+        "detail": "-1.22% vs required < 0%"
       },
       "liquidity": {
         "pass": true,
@@ -75,7 +75,7 @@
       },
       "pullbackNotExtended": {
         "pass": true,
-        "detail": "+0.11% vs short EMA group"
+        "detail": "+0.12% vs short EMA group"
       }
     },
     "volatilityGuard": {
@@ -125,7 +125,7 @@
     },
     "buyHoldGearReturnPct": 3.4261,
     "beatBuyHoldGear": false,
-    "buyHoldAxjoReturnPct": 2.5248,
+    "buyHoldAxjoReturnPct": 2.5353,
     "beatBuyHoldAxjo": false,
     "sharpeRatio": -0.623,
     "maxDrawdownPct": 25.83
@@ -4857,7 +4857,7 @@
         },
         "buyHoldGearReturnPct": 3.4261,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 2.5248,
+        "buyHoldAxjoReturnPct": 2.5353,
         "beatBuyHoldAxjo": false,
         "sharpeRatio": -0.623,
         "maxDrawdownPct": 25.83
