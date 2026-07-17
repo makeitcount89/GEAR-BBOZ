@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-17T15:34:26.393038+09:30",
+  "generatedAt": "2026-07-17T16:33:44.000568+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -50,15 +50,15 @@
     "asOfSessionDate": "2026-07-17",
     "asOfTimestamp": "2026-07-17T13:30:00+09:30",
     "priceSource": "intraday_14:00",
-    "rawPrediction": "CASH",
+    "rawPrediction": "GEAR",
     "recommendedAsset": "BBOZ",
     "action": "FLIP",
     "currentlyHolding": "GEAR",
-    "confidence": 0.7564,
+    "confidence": 0.7047,
     "features": {
-      "shortGroupCompressionPct": 0.0261,
-      "longGroupSeparationPct": 0.0654,
-      "priceVsShortGroupPct": -0.3208
+      "shortGroupCompressionPct": 0.0484,
+      "longGroupSeparationPct": 0.068,
+      "priceVsShortGroupPct": -0.1484
     },
     "filters": {
       "trendAlignment": {
@@ -67,7 +67,7 @@
       },
       "relativeStrength": {
         "pass": true,
-        "detail": "-0.59% vs required < 0%"
+        "detail": "-0.36% vs required < 0%"
       },
       "liquidity": {
         "pass": true,
@@ -75,12 +75,12 @@
       },
       "pullbackNotExtended": {
         "pass": true,
-        "detail": "-0.32% vs short EMA group"
+        "detail": "-0.15% vs short EMA group"
       }
     },
     "volatilityGuard": {
       "pass": false,
-      "detail": "price below its 10-day MA; 10-day MA above its 30-day MA; 0.54% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+      "detail": "price below its 10-day MA; 10-day MA above its 30-day MA; 0.52% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
     },
     "lastPrices": {
       "GEAR": 35.14,
@@ -125,7 +125,7 @@
     },
     "buyHoldGearReturnPct": 2.6585,
     "beatBuyHoldGear": false,
-    "buyHoldAxjoReturnPct": 2.2879,
+    "buyHoldAxjoReturnPct": 2.5245,
     "beatBuyHoldAxjo": false,
     "sharpeRatio": -0.656,
     "maxDrawdownPct": 25.83
@@ -4857,7 +4857,7 @@
         },
         "buyHoldGearReturnPct": 2.6585,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 2.2879,
+        "buyHoldAxjoReturnPct": 2.5245,
         "beatBuyHoldAxjo": false,
         "sharpeRatio": -0.656,
         "maxDrawdownPct": 25.83
@@ -5158,7 +5158,7 @@
       "stdDevTotalReturnPct": 26.28,
       "meanBuyHoldGearReturnPct": 8.47,
       "windowsBeatingBuyHoldGear": 2,
-      "meanBuyHoldAxjoReturnPct": 4.98,
+      "meanBuyHoldAxjoReturnPct": 5.01,
       "windowsBeatingBuyHoldAxjo": 3,
       "meanSharpeRatio": -0.221,
       "meanMaxDrawdownPct": 30.16,
