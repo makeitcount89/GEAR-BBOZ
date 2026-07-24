@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T15:43:26.829045+09:30",
+  "generatedAt": "2026-07-24T16:48:15.187314+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -54,11 +54,11 @@
     "recommendedAsset": "BBOZ",
     "action": "HOLD",
     "currentlyHolding": "BBOZ",
-    "confidence": 0.6582,
+    "confidence": 0.7262,
     "features": {
-      "shortGroupCompressionPct": 0.0334,
-      "longGroupSeparationPct": 0.066,
-      "priceVsShortGroupPct": -0.3782
+      "shortGroupCompressionPct": 0.0296,
+      "longGroupSeparationPct": 0.0663,
+      "priceVsShortGroupPct": -0.3552
     },
     "filters": {
       "trendAlignment": {
@@ -67,7 +67,7 @@
       },
       "relativeStrength": {
         "pass": false,
-        "detail": "+0.06% vs required < 0%"
+        "detail": "+0.09% vs required < 0%"
       },
       "liquidity": {
         "pass": true,
@@ -75,12 +75,12 @@
       },
       "pullbackNotExtended": {
         "pass": true,
-        "detail": "-0.38% vs short EMA group"
+        "detail": "-0.36% vs short EMA group"
       }
     },
     "volatilityGuard": {
       "pass": false,
-      "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.34% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+      "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.33% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
     },
     "lastPrices": {
       "GEAR": 35.02,
@@ -125,7 +125,7 @@
     },
     "buyHoldGearReturnPct": -2.4241,
     "beatBuyHoldGear": false,
-    "buyHoldAxjoReturnPct": 0.1416,
+    "buyHoldAxjoReturnPct": 0.1724,
     "beatBuyHoldAxjo": false,
     "sharpeRatio": -0.878,
     "maxDrawdownPct": 25.83
@@ -4857,7 +4857,7 @@
         },
         "buyHoldGearReturnPct": -2.4241,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 0.1416,
+        "buyHoldAxjoReturnPct": 0.1724,
         "beatBuyHoldAxjo": false,
         "sharpeRatio": -0.878,
         "maxDrawdownPct": 25.83
