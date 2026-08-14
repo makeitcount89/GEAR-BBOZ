@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T14:49:38.014474+09:30",
+  "generatedAt": "2026-08-14T15:34:41.276929+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -50,15 +50,15 @@
     "asOfSessionDate": "2026-08-14",
     "asOfTimestamp": "2026-08-14T13:30:00+09:30",
     "priceSource": "intraday_14:00",
-    "rawPrediction": "GEAR",
+    "rawPrediction": "BBOZ",
     "recommendedAsset": "BBOZ",
     "action": "FLIP",
     "currentlyHolding": "GEAR",
-    "confidence": 0.3729,
+    "confidence": 0.5117,
     "features": {
-      "shortGroupCompressionPct": 0.2464,
-      "longGroupSeparationPct": 0.3921,
-      "priceVsShortGroupPct": -0.5845
+      "shortGroupCompressionPct": 0.2421,
+      "longGroupSeparationPct": 0.3937,
+      "priceVsShortGroupPct": -0.5099
     },
     "filters": {
       "trendAlignment": {
@@ -67,7 +67,7 @@
       },
       "relativeStrength": {
         "pass": false,
-        "detail": "+3.21% vs required < 0%"
+        "detail": "+3.47% vs required < 0%"
       },
       "liquidity": {
         "pass": true,
@@ -75,12 +75,12 @@
       },
       "pullbackNotExtended": {
         "pass": true,
-        "detail": "-0.58% vs short EMA group"
+        "detail": "-0.51% vs short EMA group"
       }
     },
     "volatilityGuard": {
       "pass": false,
-      "detail": "price below its 10-day MA; 10-day MA above its 30-day MA; 0.79% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+      "detail": "price below its 10-day MA; 10-day MA above its 30-day MA; 0.73% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
     },
     "lastPrices": {
       "GEAR": 37.8,
@@ -125,7 +125,7 @@
     },
     "buyHoldGearReturnPct": 4.5643,
     "beatBuyHoldGear": false,
-    "buyHoldAxjoReturnPct": 3.2224,
+    "buyHoldAxjoReturnPct": 3.3507,
     "beatBuyHoldAxjo": false,
     "sharpeRatio": -0.595,
     "maxDrawdownPct": 23.16
@@ -4016,16 +4016,16 @@
       "realizationDate": "2026-07-24",
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
-      "rawPrediction": "CASH",
-      "rawConfidence": 0.6727,
+      "rawPrediction": "BBOZ",
+      "rawConfidence": 0.4173,
       "filters": {
         "trendAlignment": {
           "pass": false,
           "detail": "bearish"
         },
         "relativeStrength": {
-          "pass": true,
-          "detail": "-0.28% vs required < 0%"
+          "pass": false,
+          "detail": "+0.07% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4033,12 +4033,12 @@
         },
         "pullbackNotExtended": {
           "pass": true,
-          "detail": "-0.15% vs short EMA group"
+          "detail": "-0.10% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": false,
-        "detail": "price below its 10-day MA; 10-day MA above its 30-day MA; 0.49% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+        "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.47% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
       },
       "actualDirection": "FLAT",
       "predictionCorrect": false,
@@ -4057,15 +4057,15 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.712,
+      "rawConfidence": 0.7262,
       "filters": {
         "trendAlignment": {
           "pass": false,
           "detail": "bearish"
         },
         "relativeStrength": {
-          "pass": true,
-          "detail": "-0.41% vs required < 0%"
+          "pass": false,
+          "detail": "+0.09% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4073,12 +4073,12 @@
         },
         "pullbackNotExtended": {
           "pass": true,
-          "detail": "-0.34% vs short EMA group"
+          "detail": "-0.36% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": false,
-        "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.51% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+        "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.33% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
       },
       "actualDirection": "UP",
       "predictionCorrect": false,
@@ -4097,7 +4097,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.6831,
+      "rawConfidence": 0.6839,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4105,7 +4105,7 @@
         },
         "relativeStrength": {
           "pass": false,
-          "detail": "+2.09% vs required < 0%"
+          "detail": "+1.93% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4118,7 +4118,7 @@
       },
       "volatilityGuard": {
         "pass": true,
-        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.53% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.51% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
       },
       "actualDirection": "FLAT",
       "predictionCorrect": false,
@@ -4137,7 +4137,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6344,
+      "rawConfidence": 1.0,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4145,7 +4145,7 @@
         },
         "relativeStrength": {
           "pass": false,
-          "detail": "+2.15% vs required < 0%"
+          "detail": "+1.50% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4153,12 +4153,12 @@
         },
         "pullbackNotExtended": {
           "pass": true,
-          "detail": "+0.63% vs short EMA group"
+          "detail": "+0.59% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": true,
-        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.62% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.59% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
       },
       "actualDirection": "UP",
       "predictionCorrect": true,
@@ -4177,7 +4177,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.6254,
+      "rawConfidence": 1.0,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4185,7 +4185,7 @@
         },
         "relativeStrength": {
           "pass": false,
-          "detail": "+4.83% vs required < 0%"
+          "detail": "+3.88% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4193,12 +4193,12 @@
         },
         "pullbackNotExtended": {
           "pass": false,
-          "detail": "+1.81% vs short EMA group"
+          "detail": "+1.72% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": true,
-        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.68% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.67% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
       },
       "actualDirection": "UP",
       "predictionCorrect": true,
@@ -4217,7 +4217,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.5951,
+      "rawConfidence": 0.5624,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4225,20 +4225,20 @@
         },
         "relativeStrength": {
           "pass": false,
-          "detail": "+5.22% vs required < 0%"
+          "detail": "+5.20% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
           "detail": "BBOZ.AX volume vs 50% of its 20-day average"
         },
         "pullbackNotExtended": {
-          "pass": false,
-          "detail": "+1.53% vs short EMA group"
+          "pass": true,
+          "detail": "+1.48% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": true,
-        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.70% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.66% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
       },
       "actualDirection": "FLAT",
       "predictionCorrect": false,
@@ -4257,7 +4257,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.8238,
+      "rawConfidence": 0.8499,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4265,7 +4265,7 @@
         },
         "relativeStrength": {
           "pass": false,
-          "detail": "+5.57% vs required < 0%"
+          "detail": "+5.02% vs required < 0%"
         },
         "liquidity": {
           "pass": true,
@@ -4273,12 +4273,12 @@
         },
         "pullbackNotExtended": {
           "pass": true,
-          "detail": "+0.96% vs short EMA group"
+          "detail": "+0.93% vs short EMA group"
         }
       },
       "volatilityGuard": {
         "pass": true,
-        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.71% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
+        "detail": "price above its 10-day MA; 10-day MA above its 30-day MA; 0.67% realized 15-day vol (normal vs its own 60-day baseline); price above its 30-day MA"
       },
       "actualDirection": "DOWN",
       "predictionCorrect": false,
@@ -4857,7 +4857,7 @@
         },
         "buyHoldGearReturnPct": 4.5643,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 3.2224,
+        "buyHoldAxjoReturnPct": 3.3507,
         "beatBuyHoldAxjo": false,
         "sharpeRatio": -0.595,
         "maxDrawdownPct": 23.16
@@ -5158,7 +5158,7 @@
       "stdDevTotalReturnPct": 24.93,
       "meanBuyHoldGearReturnPct": 9.0,
       "windowsBeatingBuyHoldGear": 2,
-      "meanBuyHoldAxjoReturnPct": 5.23,
+      "meanBuyHoldAxjoReturnPct": 5.24,
       "windowsBeatingBuyHoldAxjo": 2,
       "meanSharpeRatio": -0.218,
       "meanMaxDrawdownPct": 26.73,
