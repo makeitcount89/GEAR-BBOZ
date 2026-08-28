@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T01:10:17.877064+09:30",
+  "generatedAt": "2026-08-29T02:25:56.552448+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
