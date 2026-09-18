@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T17:59:52.852701+09:30",
+  "generatedAt": "2026-09-18T18:42:59.300906+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -162,13 +162,13 @@
       },
       "actualDirection": "FLAT",
       "predictionCorrect": false,
-      "gearPrice": 37.19,
-      "bbozPrice": 21.16,
-      "intervalReturnPct": 0.1616,
+      "gearPrice": 37.18,
+      "bbozPrice": 21.15,
+      "intervalReturnPct": 0.1347,
       "spreadCostPct": 0.4,
       "portfolioValueBefore": 500.0,
-      "portfolioValueAfter": 498.8047,
-      "cumulativeReturnPct": -0.2391,
+      "portfolioValueAfter": 498.6706,
+      "cumulativeReturnPct": -0.2659,
       "priceSource": "intraday_14:00"
     },
     {
@@ -204,9 +204,9 @@
       "predictionCorrect": false,
       "gearPrice": 36.51,
       "bbozPrice": 21.57,
-      "intervalReturnPct": -1.8284,
+      "intervalReturnPct": -1.802,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 498.8047,
+      "portfolioValueBefore": 498.6706,
       "portfolioValueAfter": 489.6843,
       "cumulativeReturnPct": -2.0631,
       "priceSource": "intraday_14:00"
@@ -4300,8 +4300,8 @@
     },
     {
       "date": "2025-09-16",
-      "portfolioValue": 498.8047,
-      "cumulativeProfit": -1.1953
+      "portfolioValue": 498.6706,
+      "cumulativeProfit": -1.3294
     },
     {
       "date": "2025-09-19",
