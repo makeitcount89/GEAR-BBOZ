@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T18:42:59.300906+09:30",
+  "generatedAt": "2026-09-22T18:18:20.524359+09:30",
   "meta": {
     "strategy": "Bi-weekly rolling GMMA k-NN (GEAR/BBOZ) with rule-based confirmation filters",
     "tickers": {
@@ -47,18 +47,18 @@
     }
   },
   "liveSignal": {
-    "asOfSessionDate": "2026-09-18",
-    "asOfTimestamp": "2026-09-18T13:30:00+09:30",
+    "asOfSessionDate": "2026-09-22",
+    "asOfTimestamp": "2026-09-22T13:30:00+09:30",
     "priceSource": "intraday_14:00",
-    "rawPrediction": "BBOZ",
-    "recommendedAsset": "BBOZ",
-    "action": "HOLD",
+    "rawPrediction": "GEAR",
+    "recommendedAsset": "GEAR",
+    "action": "FLIP",
     "currentlyHolding": "BBOZ",
-    "confidence": 0.6578,
+    "confidence": 0.4325,
     "features": {
-      "shortGroupCompressionPct": 0.5172,
-      "longGroupSeparationPct": 0.0509,
-      "priceVsShortGroupPct": -0.5773
+      "shortGroupCompressionPct": 0.3521,
+      "longGroupSeparationPct": 0.078,
+      "priceVsShortGroupPct": -0.1856
     },
     "filters": {
       "trendAlignment": {
@@ -67,7 +67,7 @@
       },
       "relativeStrength": {
         "pass": true,
-        "detail": "-3.62% vs required < 0%"
+        "detail": "-4.44% vs required < 0%"
       },
       "liquidity": {
         "pass": false,
@@ -75,109 +75,69 @@
       },
       "pullbackNotExtended": {
         "pass": true,
-        "detail": "-0.58% vs short EMA group"
+        "detail": "-0.19% vs short EMA group"
       }
     },
     "volatilityGuard": {
       "pass": false,
-      "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.54% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+      "detail": "price above its 10-day MA; 10-day MA below its 30-day MA; 0.56% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
     },
     "lastPrices": {
-      "GEAR": 35.27,
-      "BBOZ": 21.82
+      "GEAR": 35.47,
+      "BBOZ": 21.68
     },
     "trainingSamples": 987,
     "currentStreak": {
       "type": "L",
-      "length": 1
+      "length": 2
     }
   },
   "portfolio": {
     "initialCapital": 500.0,
-    "currentValue": 435.8,
-    "totalReturnPct": -12.8405,
+    "currentValue": 434.04,
+    "totalReturnPct": -13.1922,
     "totalTrades": 104,
-    "wins": 48,
-    "losses": 56,
+    "wins": 47,
+    "losses": 57,
     "cashSessions": 0,
-    "winRatePct": 46.15,
+    "winRatePct": 45.19,
     "currentStreak": {
       "type": "L",
-      "length": 1
+      "length": 2
     },
     "assetBreakdown": {
       "GEAR": {
-        "trades": 47,
-        "wins": 18,
+        "trades": 46,
+        "wins": 17,
         "losses": 29,
-        "winRatePct": 38.3,
-        "dollarPnl": -44.7947,
-        "contributionPct": 69.77
+        "winRatePct": 36.96,
+        "dollarPnl": -43.7039,
+        "contributionPct": 66.26
       },
       "BBOZ": {
-        "trades": 57,
+        "trades": 58,
         "wins": 30,
-        "losses": 27,
-        "winRatePct": 52.63,
-        "dollarPnl": -19.4079,
-        "contributionPct": 30.23
+        "losses": 28,
+        "winRatePct": 51.72,
+        "dollarPnl": -22.2572,
+        "contributionPct": 33.74
       }
     },
-    "buyHoldGearReturnPct": -5.0094,
+    "buyHoldGearReturnPct": -4.6249,
     "beatBuyHoldGear": false,
-    "buyHoldAxjoReturnPct": -1.5082,
+    "buyHoldAxjoReturnPct": -1.3506,
     "beatBuyHoldAxjo": false,
-    "sharpeRatio": -0.469,
+    "sharpeRatio": -0.486,
     "maxDrawdownPct": 23.16
   },
   "ledger": [
-    {
-      "decisionDate": "2025-09-12",
-      "realizationDate": "2025-09-16",
-      "allocatedAsset": "GEAR",
-      "action": "FLIP",
-      "rawPrediction": "CASH",
-      "rawConfidence": 0.519,
-      "filters": {
-        "trendAlignment": {
-          "pass": false,
-          "detail": "bearish"
-        },
-        "relativeStrength": {
-          "pass": true,
-          "detail": "-0.82% vs required < 0%"
-        },
-        "liquidity": {
-          "pass": true,
-          "detail": "BBOZ.AX volume vs 50% of its 20-day average"
-        },
-        "pullbackNotExtended": {
-          "pass": true,
-          "detail": "+0.18% vs short EMA group"
-        }
-      },
-      "volatilityGuard": {
-        "pass": false,
-        "detail": "price above its 10-day MA; 10-day MA below its 30-day MA; 0.66% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
-      },
-      "actualDirection": "FLAT",
-      "predictionCorrect": false,
-      "gearPrice": 37.18,
-      "bbozPrice": 21.15,
-      "intervalReturnPct": 0.1347,
-      "spreadCostPct": 0.4,
-      "portfolioValueBefore": 500.0,
-      "portfolioValueAfter": 498.6706,
-      "cumulativeReturnPct": -0.2659,
-      "priceSource": "intraday_14:00"
-    },
     {
       "decisionDate": "2025-09-16",
       "realizationDate": "2025-09-19",
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.694,
+      "rawConfidence": 0.6833,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -204,11 +164,11 @@
       "predictionCorrect": false,
       "gearPrice": 36.51,
       "bbozPrice": 21.57,
-      "intervalReturnPct": -1.802,
+      "intervalReturnPct": -1.8284,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 498.6706,
-      "portfolioValueAfter": 489.6843,
-      "cumulativeReturnPct": -2.0631,
+      "portfolioValueBefore": 500.0,
+      "portfolioValueAfter": 490.8578,
+      "cumulativeReturnPct": -1.8284,
       "priceSource": "intraday_14:00"
     },
     {
@@ -217,7 +177,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.411,
+      "rawConfidence": 0.3935,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -246,9 +206,9 @@
       "bbozPrice": 21.32,
       "intervalReturnPct": -1.159,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 489.6843,
-      "portfolioValueAfter": 482.0728,
-      "cumulativeReturnPct": -3.5854,
+      "portfolioValueBefore": 490.8578,
+      "portfolioValueAfter": 483.228,
+      "cumulativeReturnPct": -3.3544,
       "priceSource": "intraday_14:00"
     },
     {
@@ -257,7 +217,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.3667,
+      "rawConfidence": 0.3666,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -286,9 +246,9 @@
       "bbozPrice": 21.74,
       "intervalReturnPct": -2.0309,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 482.0728,
-      "portfolioValueAfter": 470.3934,
-      "cumulativeReturnPct": -5.9213,
+      "portfolioValueBefore": 483.228,
+      "portfolioValueAfter": 471.5206,
+      "cumulativeReturnPct": -5.6959,
       "priceSource": "intraday_14:00"
     },
     {
@@ -326,9 +286,9 @@
       "bbozPrice": 21.4,
       "intervalReturnPct": -1.5639,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 470.3934,
-      "portfolioValueAfter": 461.1846,
-      "cumulativeReturnPct": -7.7631,
+      "portfolioValueBefore": 471.5206,
+      "portfolioValueAfter": 462.2897,
+      "cumulativeReturnPct": -7.5421,
       "priceSource": "intraday_14:00"
     },
     {
@@ -337,7 +297,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.3916,
+      "rawConfidence": 0.3871,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -366,9 +326,9 @@
       "bbozPrice": 20.71,
       "intervalReturnPct": 3.2564,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 461.1846,
-      "portfolioValueAfter": 474.298,
-      "cumulativeReturnPct": -5.1404,
+      "portfolioValueBefore": 462.2897,
+      "portfolioValueAfter": 475.4345,
+      "cumulativeReturnPct": -4.9131,
       "priceSource": "intraday_14:00"
     },
     {
@@ -406,9 +366,9 @@
       "bbozPrice": 20.92,
       "intervalReturnPct": -0.9198,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 474.298,
-      "portfolioValueAfter": 469.9352,
-      "cumulativeReturnPct": -6.013,
+      "portfolioValueBefore": 475.4345,
+      "portfolioValueAfter": 471.0613,
+      "cumulativeReturnPct": -5.7877,
       "priceSource": "intraday_14:00"
     },
     {
@@ -446,9 +406,9 @@
       "bbozPrice": 20.89,
       "intervalReturnPct": 0.0531,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 469.9352,
-      "portfolioValueAfter": 470.1845,
-      "cumulativeReturnPct": -5.9631,
+      "portfolioValueBefore": 471.0613,
+      "portfolioValueAfter": 471.3112,
+      "cumulativeReturnPct": -5.7378,
       "priceSource": "intraday_14:00"
     },
     {
@@ -486,9 +446,9 @@
       "bbozPrice": 21.25,
       "intervalReturnPct": -1.5111,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 470.1845,
-      "portfolioValueAfter": 463.0794,
-      "cumulativeReturnPct": -7.3841,
+      "portfolioValueBefore": 471.3112,
+      "portfolioValueAfter": 464.1891,
+      "cumulativeReturnPct": -7.1622,
       "priceSource": "intraday_14:00"
     },
     {
@@ -526,9 +486,9 @@
       "bbozPrice": 20.73,
       "intervalReturnPct": -2.4471,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 463.0794,
-      "portfolioValueAfter": 449.9406,
-      "cumulativeReturnPct": -10.0119,
+      "portfolioValueBefore": 464.1891,
+      "portfolioValueAfter": 451.0188,
+      "cumulativeReturnPct": -9.7962,
       "priceSource": "intraday_14:00"
     },
     {
@@ -566,9 +526,9 @@
       "bbozPrice": 20.21,
       "intervalReturnPct": 2.2865,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 449.9406,
-      "portfolioValueAfter": 458.3874,
-      "cumulativeReturnPct": -8.3225,
+      "portfolioValueBefore": 451.0188,
+      "portfolioValueAfter": 459.4858,
+      "cumulativeReturnPct": -8.1028,
       "priceSource": "intraday_14:00"
     },
     {
@@ -576,8 +536,8 @@
       "realizationDate": "2025-10-24",
       "allocatedAsset": "GEAR",
       "action": "HOLD",
-      "rawPrediction": "CASH",
-      "rawConfidence": 0.6106,
+      "rawPrediction": "BBOZ",
+      "rawConfidence": 0.3862,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -606,9 +566,9 @@
       "bbozPrice": 20.6,
       "intervalReturnPct": -1.6444,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 458.3874,
-      "portfolioValueAfter": 450.8497,
-      "cumulativeReturnPct": -9.8301,
+      "portfolioValueBefore": 459.4858,
+      "portfolioValueAfter": 451.93,
+      "cumulativeReturnPct": -9.614,
       "priceSource": "intraday_14:00"
     },
     {
@@ -617,7 +577,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.7244,
+      "rawConfidence": 0.7243,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -646,9 +606,9 @@
       "bbozPrice": 20.65,
       "intervalReturnPct": -0.1045,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 450.8497,
-      "portfolioValueAfter": 450.3786,
-      "cumulativeReturnPct": -9.9243,
+      "portfolioValueBefore": 451.93,
+      "portfolioValueAfter": 451.4578,
+      "cumulativeReturnPct": -9.7084,
       "priceSource": "intraday_14:00"
     },
     {
@@ -657,7 +617,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6523,
+      "rawConfidence": 0.6516,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -686,9 +646,9 @@
       "bbozPrice": 21.25,
       "intervalReturnPct": 2.9056,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 450.3786,
-      "portfolioValueAfter": 461.6108,
-      "cumulativeReturnPct": -7.6778,
+      "portfolioValueBefore": 451.4578,
+      "portfolioValueAfter": 462.717,
+      "cumulativeReturnPct": -7.4566,
       "priceSource": "intraday_14:00"
     },
     {
@@ -726,9 +686,9 @@
       "bbozPrice": 21.69,
       "intervalReturnPct": 2.0706,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 461.6108,
-      "portfolioValueAfter": 471.1689,
-      "cumulativeReturnPct": -5.7662,
+      "portfolioValueBefore": 462.717,
+      "portfolioValueAfter": 472.2979,
+      "cumulativeReturnPct": -5.5404,
       "priceSource": "intraday_14:00"
     },
     {
@@ -766,9 +726,9 @@
       "bbozPrice": 21.95,
       "intervalReturnPct": 1.1987,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 471.1689,
-      "portfolioValueAfter": 476.8168,
-      "cumulativeReturnPct": -4.6366,
+      "portfolioValueBefore": 472.2979,
+      "portfolioValueAfter": 477.9594,
+      "cumulativeReturnPct": -4.4081,
       "priceSource": "intraday_14:00"
     },
     {
@@ -806,9 +766,9 @@
       "bbozPrice": 21.65,
       "intervalReturnPct": -1.3667,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 476.8168,
-      "portfolioValueAfter": 470.2999,
-      "cumulativeReturnPct": -5.94,
+      "portfolioValueBefore": 477.9594,
+      "portfolioValueAfter": 471.4269,
+      "cumulativeReturnPct": -5.7146,
       "priceSource": "intraday_14:00"
     },
     {
@@ -817,7 +777,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.68,
+      "rawConfidence": 0.6799,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -846,9 +806,9 @@
       "bbozPrice": 22.69,
       "intervalReturnPct": 4.8037,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 470.2999,
-      "portfolioValueAfter": 492.8917,
-      "cumulativeReturnPct": -1.4217,
+      "portfolioValueBefore": 471.4269,
+      "portfolioValueAfter": 494.0729,
+      "cumulativeReturnPct": -1.1854,
       "priceSource": "intraday_14:00"
     },
     {
@@ -886,9 +846,9 @@
       "bbozPrice": 23.61,
       "intervalReturnPct": 4.0546,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 492.8917,
-      "portfolioValueAfter": 512.8768,
-      "cumulativeReturnPct": 2.5754,
+      "portfolioValueBefore": 494.0729,
+      "portfolioValueAfter": 514.1058,
+      "cumulativeReturnPct": 2.8212,
       "priceSource": "intraday_14:00"
     },
     {
@@ -926,9 +886,9 @@
       "bbozPrice": 23.93,
       "intervalReturnPct": 1.3554,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 512.8768,
-      "portfolioValueAfter": 519.8281,
-      "cumulativeReturnPct": 3.9656,
+      "portfolioValueBefore": 514.1058,
+      "portfolioValueAfter": 521.0737,
+      "cumulativeReturnPct": 4.2147,
       "priceSource": "intraday_14:00"
     },
     {
@@ -966,9 +926,9 @@
       "bbozPrice": 23.42,
       "intervalReturnPct": -2.1312,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 519.8281,
-      "portfolioValueAfter": 508.7494,
-      "cumulativeReturnPct": 1.7499,
+      "portfolioValueBefore": 521.0737,
+      "portfolioValueAfter": 509.9685,
+      "cumulativeReturnPct": 1.9937,
       "priceSource": "intraday_14:00"
     },
     {
@@ -977,7 +937,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.6489,
+      "rawConfidence": 0.649,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -1006,9 +966,9 @@
       "bbozPrice": 22.79,
       "intervalReturnPct": -2.69,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 508.7494,
-      "portfolioValueAfter": 495.064,
-      "cumulativeReturnPct": -0.9872,
+      "portfolioValueBefore": 509.9685,
+      "portfolioValueAfter": 496.2504,
+      "cumulativeReturnPct": -0.7499,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1017,7 +977,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6232,
+      "rawConfidence": 0.6231,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -1046,9 +1006,9 @@
       "bbozPrice": 23.02,
       "intervalReturnPct": -1.0935,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 495.064,
-      "portfolioValueAfter": 487.6918,
-      "cumulativeReturnPct": -2.4616,
+      "portfolioValueBefore": 496.2504,
+      "portfolioValueAfter": 488.8604,
+      "cumulativeReturnPct": -2.2279,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1057,7 +1017,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.6874,
+      "rawConfidence": 0.6857,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -1086,9 +1046,9 @@
       "bbozPrice": 22.85,
       "intervalReturnPct": 0.8729,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 487.6918,
-      "portfolioValueAfter": 491.9486,
-      "cumulativeReturnPct": -1.6103,
+      "portfolioValueBefore": 488.8604,
+      "portfolioValueAfter": 493.1274,
+      "cumulativeReturnPct": -1.3745,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1126,9 +1086,9 @@
       "bbozPrice": 22.95,
       "intervalReturnPct": -0.6345,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 491.9486,
-      "portfolioValueAfter": 488.8269,
-      "cumulativeReturnPct": -2.2346,
+      "portfolioValueBefore": 493.1274,
+      "portfolioValueAfter": 489.9983,
+      "cumulativeReturnPct": -2.0003,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1166,9 +1126,9 @@
       "bbozPrice": 22.4,
       "intervalReturnPct": -2.3965,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 488.8269,
-      "portfolioValueAfter": 475.2037,
-      "cumulativeReturnPct": -4.9593,
+      "portfolioValueBefore": 489.9983,
+      "portfolioValueAfter": 476.3424,
+      "cumulativeReturnPct": -4.7315,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1177,7 +1137,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.7062,
+      "rawConfidence": 0.716,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -1206,9 +1166,9 @@
       "bbozPrice": 23.04,
       "intervalReturnPct": -2.6576,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 475.2037,
-      "portfolioValueAfter": 460.7243,
-      "cumulativeReturnPct": -7.8551,
+      "portfolioValueBefore": 476.3424,
+      "portfolioValueAfter": 461.8283,
+      "cumulativeReturnPct": -7.6343,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1246,9 +1206,9 @@
       "bbozPrice": 22.85,
       "intervalReturnPct": -0.8247,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 460.7243,
-      "portfolioValueAfter": 455.0972,
-      "cumulativeReturnPct": -8.9806,
+      "portfolioValueBefore": 461.8283,
+      "portfolioValueAfter": 456.1877,
+      "cumulativeReturnPct": -8.7625,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1286,9 +1246,9 @@
       "bbozPrice": 21.89,
       "intervalReturnPct": 3.9735,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 455.0972,
-      "portfolioValueAfter": 471.2878,
-      "cumulativeReturnPct": -5.7424,
+      "portfolioValueBefore": 456.1877,
+      "portfolioValueAfter": 472.4172,
+      "cumulativeReturnPct": -5.5166,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1326,9 +1286,9 @@
       "bbozPrice": 22.28,
       "intervalReturnPct": -1.8831,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 471.2878,
-      "portfolioValueAfter": 462.4128,
-      "cumulativeReturnPct": -7.5174,
+      "portfolioValueBefore": 472.4172,
+      "portfolioValueAfter": 463.5209,
+      "cumulativeReturnPct": -7.2958,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1366,9 +1326,9 @@
       "bbozPrice": 22.28,
       "intervalReturnPct": -0.875,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 462.4128,
-      "portfolioValueAfter": 458.3669,
-      "cumulativeReturnPct": -8.3266,
+      "portfolioValueBefore": 463.5209,
+      "portfolioValueAfter": 459.4653,
+      "cumulativeReturnPct": -8.1069,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1406,9 +1366,9 @@
       "bbozPrice": 22.54,
       "intervalReturnPct": -0.9396,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 458.3669,
-      "portfolioValueAfter": 454.0599,
-      "cumulativeReturnPct": -9.188,
+      "portfolioValueBefore": 459.4653,
+      "portfolioValueAfter": 455.148,
+      "cumulativeReturnPct": -8.9704,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1417,7 +1377,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.7429,
+      "rawConfidence": 0.7427,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1446,9 +1406,9 @@
       "bbozPrice": 22.45,
       "intervalReturnPct": -0.3993,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 454.0599,
-      "portfolioValueAfter": 450.4379,
-      "cumulativeReturnPct": -9.9124,
+      "portfolioValueBefore": 455.148,
+      "portfolioValueAfter": 451.5173,
+      "cumulativeReturnPct": -9.6965,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1486,9 +1446,9 @@
       "bbozPrice": 21.77,
       "intervalReturnPct": -3.029,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 450.4379,
-      "portfolioValueAfter": 436.7943,
-      "cumulativeReturnPct": -12.6411,
+      "portfolioValueBefore": 451.5173,
+      "portfolioValueAfter": 437.841,
+      "cumulativeReturnPct": -12.4318,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1526,9 +1486,9 @@
       "bbozPrice": 21.38,
       "intervalReturnPct": 1.7529,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 436.7943,
-      "portfolioValueAfter": 442.6732,
-      "cumulativeReturnPct": -11.4654,
+      "portfolioValueBefore": 437.841,
+      "portfolioValueAfter": 443.734,
+      "cumulativeReturnPct": -11.2532,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1537,7 +1497,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.6205,
+      "rawConfidence": 0.6204,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1566,9 +1526,9 @@
       "bbozPrice": 21.9,
       "intervalReturnPct": -2.0782,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 442.6732,
-      "portfolioValueAfter": 433.4736,
-      "cumulativeReturnPct": -13.3053,
+      "portfolioValueBefore": 443.734,
+      "portfolioValueAfter": 434.5123,
+      "cumulativeReturnPct": -13.0975,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1606,9 +1566,9 @@
       "bbozPrice": 21.64,
       "intervalReturnPct": 0.9774,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 433.4736,
-      "portfolioValueAfter": 437.7102,
-      "cumulativeReturnPct": -12.458,
+      "portfolioValueBefore": 434.5123,
+      "portfolioValueAfter": 438.7591,
+      "cumulativeReturnPct": -12.2482,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1617,7 +1577,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.5283,
+      "rawConfidence": 0.5284,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1646,9 +1606,9 @@
       "bbozPrice": 21.2,
       "intervalReturnPct": 1.7146,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 437.7102,
-      "portfolioValueAfter": 445.2152,
-      "cumulativeReturnPct": -10.957,
+      "portfolioValueBefore": 438.7591,
+      "portfolioValueAfter": 446.2821,
+      "cumulativeReturnPct": -10.7436,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1657,7 +1617,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.8606,
+      "rawConfidence": 0.8607,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1686,9 +1646,9 @@
       "bbozPrice": 21.68,
       "intervalReturnPct": -1.7129,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 445.2152,
-      "portfolioValueAfter": 437.5892,
-      "cumulativeReturnPct": -12.4822,
+      "portfolioValueBefore": 446.2821,
+      "portfolioValueAfter": 438.6378,
+      "cumulativeReturnPct": -12.2724,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1726,9 +1686,9 @@
       "bbozPrice": 21.84,
       "intervalReturnPct": 0.738,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 437.5892,
-      "portfolioValueAfter": 439.0554,
-      "cumulativeReturnPct": -12.1889,
+      "portfolioValueBefore": 438.6378,
+      "portfolioValueAfter": 440.1075,
+      "cumulativeReturnPct": -11.9785,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1737,7 +1697,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.7929,
+      "rawConfidence": 0.7926,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1766,9 +1726,9 @@
       "bbozPrice": 22.64,
       "intervalReturnPct": 3.663,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 439.0554,
-      "portfolioValueAfter": 455.138,
-      "cumulativeReturnPct": -8.9724,
+      "portfolioValueBefore": 440.1075,
+      "portfolioValueAfter": 456.2286,
+      "cumulativeReturnPct": -8.7543,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1806,9 +1766,9 @@
       "bbozPrice": 21.71,
       "intervalReturnPct": -4.1078,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 455.138,
-      "portfolioValueAfter": 436.4419,
-      "cumulativeReturnPct": -12.7116,
+      "portfolioValueBefore": 456.2286,
+      "portfolioValueAfter": 437.4878,
+      "cumulativeReturnPct": -12.5024,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1846,9 +1806,9 @@
       "bbozPrice": 21.48,
       "intervalReturnPct": -1.0594,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 436.4419,
-      "portfolioValueAfter": 431.8182,
-      "cumulativeReturnPct": -13.6364,
+      "portfolioValueBefore": 437.4878,
+      "portfolioValueAfter": 432.853,
+      "cumulativeReturnPct": -13.4294,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1886,9 +1846,9 @@
       "bbozPrice": 21.2,
       "intervalReturnPct": -1.3035,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 431.8182,
-      "portfolioValueAfter": 426.1893,
-      "cumulativeReturnPct": -14.7621,
+      "portfolioValueBefore": 432.853,
+      "portfolioValueAfter": 427.2106,
+      "cumulativeReturnPct": -14.5579,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1897,7 +1857,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6379,
+      "rawConfidence": 0.638,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -1926,9 +1886,9 @@
       "bbozPrice": 20.45,
       "intervalReturnPct": -3.5377,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 426.1893,
-      "portfolioValueAfter": 411.1118,
-      "cumulativeReturnPct": -17.7776,
+      "portfolioValueBefore": 427.2106,
+      "portfolioValueAfter": 412.097,
+      "cumulativeReturnPct": -17.5806,
       "priceSource": "intraday_14:00"
     },
     {
@@ -1966,9 +1926,9 @@
       "bbozPrice": 20.75,
       "intervalReturnPct": 1.467,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 411.1118,
-      "portfolioValueAfter": 417.1428,
-      "cumulativeReturnPct": -16.5714,
+      "portfolioValueBefore": 412.097,
+      "portfolioValueAfter": 418.1424,
+      "cumulativeReturnPct": -16.3715,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2006,9 +1966,9 @@
       "bbozPrice": 19.87,
       "intervalReturnPct": -4.241,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 417.1428,
-      "portfolioValueAfter": 399.4519,
-      "cumulativeReturnPct": -20.1096,
+      "portfolioValueBefore": 418.1424,
+      "portfolioValueAfter": 400.4092,
+      "cumulativeReturnPct": -19.9182,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2046,9 +2006,9 @@
       "bbozPrice": 20.39,
       "intervalReturnPct": 2.617,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 399.4519,
-      "portfolioValueAfter": 409.9056,
-      "cumulativeReturnPct": -18.0189,
+      "portfolioValueBefore": 400.4092,
+      "portfolioValueAfter": 410.8879,
+      "cumulativeReturnPct": -17.8224,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2056,8 +2016,8 @@
       "realizationDate": "2026-03-06",
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
-      "rawPrediction": "CASH",
-      "rawConfidence": 0.6176,
+      "rawPrediction": "BBOZ",
+      "rawConfidence": 0.3776,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -2086,9 +2046,9 @@
       "bbozPrice": 21.45,
       "intervalReturnPct": 5.1986,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 409.9056,
-      "portfolioValueAfter": 431.2151,
-      "cumulativeReturnPct": -13.757,
+      "portfolioValueBefore": 410.8879,
+      "portfolioValueAfter": 432.2484,
+      "cumulativeReturnPct": -13.5503,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2126,9 +2086,9 @@
       "bbozPrice": 22.27,
       "intervalReturnPct": 3.8228,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 431.2151,
-      "portfolioValueAfter": 447.6998,
-      "cumulativeReturnPct": -10.46,
+      "portfolioValueBefore": 432.2484,
+      "portfolioValueAfter": 448.7726,
+      "cumulativeReturnPct": -10.2455,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2166,9 +2126,9 @@
       "bbozPrice": 22.48,
       "intervalReturnPct": 0.943,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 447.6998,
-      "portfolioValueAfter": 451.9215,
-      "cumulativeReturnPct": -9.6157,
+      "portfolioValueBefore": 448.7726,
+      "portfolioValueAfter": 453.0044,
+      "cumulativeReturnPct": -9.3991,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2177,7 +2137,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.7617,
+      "rawConfidence": 0.7616,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -2206,9 +2166,9 @@
       "bbozPrice": 22.62,
       "intervalReturnPct": 0.6228,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 451.9215,
-      "portfolioValueAfter": 454.7359,
-      "cumulativeReturnPct": -9.0528,
+      "portfolioValueBefore": 453.0044,
+      "portfolioValueAfter": 455.8256,
+      "cumulativeReturnPct": -8.8349,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2246,9 +2206,9 @@
       "bbozPrice": 23.57,
       "intervalReturnPct": 4.1998,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 454.7359,
-      "portfolioValueAfter": 473.834,
-      "cumulativeReturnPct": -5.2332,
+      "portfolioValueBefore": 455.8256,
+      "portfolioValueAfter": 474.9695,
+      "cumulativeReturnPct": -5.0061,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2286,9 +2246,9 @@
       "bbozPrice": 23.92,
       "intervalReturnPct": 1.4849,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 473.834,
-      "portfolioValueAfter": 480.8702,
-      "cumulativeReturnPct": -3.826,
+      "portfolioValueBefore": 474.9695,
+      "portfolioValueAfter": 482.0225,
+      "cumulativeReturnPct": -3.5955,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2326,9 +2286,9 @@
       "bbozPrice": 23.39,
       "intervalReturnPct": -2.2157,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 480.8702,
-      "portfolioValueAfter": 470.2154,
-      "cumulativeReturnPct": -5.9569,
+      "portfolioValueBefore": 482.0225,
+      "portfolioValueAfter": 471.3422,
+      "cumulativeReturnPct": -5.7316,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2337,7 +2297,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.3957,
+      "rawConfidence": 0.3956,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -2366,9 +2326,9 @@
       "bbozPrice": 23.22,
       "intervalReturnPct": 0.7499,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 470.2154,
-      "portfolioValueAfter": 471.8464,
-      "cumulativeReturnPct": -5.6307,
+      "portfolioValueBefore": 471.3422,
+      "portfolioValueAfter": 472.9771,
+      "cumulativeReturnPct": -5.4046,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2406,9 +2366,9 @@
       "bbozPrice": 22.14,
       "intervalReturnPct": -4.6512,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 471.8464,
-      "portfolioValueAfter": 448.1004,
-      "cumulativeReturnPct": -10.3799,
+      "portfolioValueBefore": 472.9771,
+      "portfolioValueAfter": 449.1742,
+      "cumulativeReturnPct": -10.1652,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2446,9 +2406,9 @@
       "bbozPrice": 20.71,
       "intervalReturnPct": 5.7752,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 448.1004,
-      "portfolioValueAfter": 472.0834,
-      "cumulativeReturnPct": -5.5833,
+      "portfolioValueBefore": 449.1742,
+      "portfolioValueAfter": 473.2147,
+      "cumulativeReturnPct": -5.3571,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2486,9 +2446,9 @@
       "bbozPrice": 20.55,
       "intervalReturnPct": 0.6724,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 472.0834,
-      "portfolioValueAfter": 475.2577,
-      "cumulativeReturnPct": -4.9485,
+      "portfolioValueBefore": 473.2147,
+      "portfolioValueAfter": 476.3966,
+      "cumulativeReturnPct": -4.7207,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2526,9 +2486,9 @@
       "bbozPrice": 20.81,
       "intervalReturnPct": -0.9885,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 475.2577,
-      "portfolioValueAfter": 470.5598,
-      "cumulativeReturnPct": -5.888,
+      "portfolioValueBefore": 476.3966,
+      "portfolioValueAfter": 471.6874,
+      "cumulativeReturnPct": -5.6625,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2537,7 +2497,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.5618,
+      "rawConfidence": 0.5619,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -2566,9 +2526,9 @@
       "bbozPrice": 20.8,
       "intervalReturnPct": 0.0809,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 470.5598,
-      "portfolioValueAfter": 470.9407,
-      "cumulativeReturnPct": -5.8119,
+      "portfolioValueBefore": 471.6874,
+      "portfolioValueAfter": 472.0692,
+      "cumulativeReturnPct": -5.5862,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2577,7 +2537,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.556,
+      "rawConfidence": 0.5559,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -2606,9 +2566,9 @@
       "bbozPrice": 21.69,
       "intervalReturnPct": 4.2789,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 470.9407,
-      "portfolioValueAfter": 489.1271,
-      "cumulativeReturnPct": -2.1746,
+      "portfolioValueBefore": 472.0692,
+      "portfolioValueAfter": 490.2992,
+      "cumulativeReturnPct": -1.9402,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2646,9 +2606,9 @@
       "bbozPrice": 22.04,
       "intervalReturnPct": 1.6136,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 489.1271,
-      "portfolioValueAfter": 497.0199,
-      "cumulativeReturnPct": -0.596,
+      "portfolioValueBefore": 490.2992,
+      "portfolioValueAfter": 498.211,
+      "cumulativeReturnPct": -0.3578,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2657,7 +2617,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.357,
+      "rawConfidence": 0.3571,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -2686,9 +2646,9 @@
       "bbozPrice": 21.9,
       "intervalReturnPct": -0.6352,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 497.0199,
-      "portfolioValueAfter": 493.8628,
-      "cumulativeReturnPct": -1.2274,
+      "portfolioValueBefore": 498.211,
+      "portfolioValueAfter": 495.0462,
+      "cumulativeReturnPct": -0.9908,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2697,7 +2657,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.5361,
+      "rawConfidence": 0.5362,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -2726,9 +2686,9 @@
       "bbozPrice": 22.39,
       "intervalReturnPct": 2.2374,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 493.8628,
-      "portfolioValueAfter": 504.9127,
-      "cumulativeReturnPct": 0.9825,
+      "portfolioValueBefore": 495.0462,
+      "portfolioValueAfter": 506.1226,
+      "cumulativeReturnPct": 1.2245,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2766,9 +2726,9 @@
       "bbozPrice": 22.0,
       "intervalReturnPct": -1.7418,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 504.9127,
-      "portfolioValueAfter": 496.1179,
-      "cumulativeReturnPct": -0.7764,
+      "portfolioValueBefore": 506.1226,
+      "portfolioValueAfter": 497.3067,
+      "cumulativeReturnPct": -0.5387,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2806,9 +2766,9 @@
       "bbozPrice": 22.21,
       "intervalReturnPct": -1.1631,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 496.1179,
-      "portfolioValueAfter": 488.386,
-      "cumulativeReturnPct": -2.3228,
+      "portfolioValueBefore": 497.3067,
+      "portfolioValueAfter": 489.5564,
+      "cumulativeReturnPct": -2.0887,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2846,9 +2806,9 @@
       "bbozPrice": 22.52,
       "intervalReturnPct": 1.3958,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 488.386,
-      "portfolioValueAfter": 493.222,
-      "cumulativeReturnPct": -1.3556,
+      "portfolioValueBefore": 489.5564,
+      "portfolioValueAfter": 494.4039,
+      "cumulativeReturnPct": -1.1192,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2886,9 +2846,9 @@
       "bbozPrice": 22.59,
       "intervalReturnPct": 0.3108,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 493.222,
-      "portfolioValueAfter": 494.7551,
-      "cumulativeReturnPct": -1.049,
+      "portfolioValueBefore": 494.4039,
+      "portfolioValueAfter": 495.9407,
+      "cumulativeReturnPct": -0.8119,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2926,9 +2886,9 @@
       "bbozPrice": 22.22,
       "intervalReturnPct": -1.6379,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 494.7551,
-      "portfolioValueAfter": 486.6515,
-      "cumulativeReturnPct": -2.6697,
+      "portfolioValueBefore": 495.9407,
+      "portfolioValueAfter": 487.8177,
+      "cumulativeReturnPct": -2.4365,
       "priceSource": "intraday_14:00"
     },
     {
@@ -2937,7 +2897,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.7111,
+      "rawConfidence": 0.711,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -2966,9 +2926,9 @@
       "bbozPrice": 22.2,
       "intervalReturnPct": 0.0,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 486.6515,
-      "portfolioValueAfter": 484.7049,
-      "cumulativeReturnPct": -3.059,
+      "portfolioValueBefore": 487.8177,
+      "portfolioValueAfter": 485.8664,
+      "cumulativeReturnPct": -2.8267,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3006,9 +2966,9 @@
       "bbozPrice": 21.88,
       "intervalReturnPct": 1.4727,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 484.7049,
-      "portfolioValueAfter": 491.8432,
-      "cumulativeReturnPct": -1.6314,
+      "portfolioValueBefore": 485.8664,
+      "portfolioValueAfter": 493.0218,
+      "cumulativeReturnPct": -1.3956,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3046,9 +3006,9 @@
       "bbozPrice": 21.99,
       "intervalReturnPct": -0.3984,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 491.8432,
-      "portfolioValueAfter": 489.8837,
-      "cumulativeReturnPct": -2.0233,
+      "portfolioValueBefore": 493.0218,
+      "portfolioValueAfter": 491.0576,
+      "cumulativeReturnPct": -1.7885,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3086,9 +3046,9 @@
       "bbozPrice": 22.5,
       "intervalReturnPct": -2.0,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 489.8837,
-      "portfolioValueAfter": 480.086,
-      "cumulativeReturnPct": -3.9828,
+      "portfolioValueBefore": 491.0576,
+      "portfolioValueAfter": 481.2364,
+      "cumulativeReturnPct": -3.7527,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3097,7 +3057,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.5693,
+      "rawConfidence": 0.5682,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -3126,9 +3086,9 @@
       "bbozPrice": 22.61,
       "intervalReturnPct": 0.4889,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 480.086,
-      "portfolioValueAfter": 480.5034,
-      "cumulativeReturnPct": -3.8993,
+      "portfolioValueBefore": 481.2364,
+      "portfolioValueAfter": 481.6548,
+      "cumulativeReturnPct": -3.669,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3137,7 +3097,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6547,
+      "rawConfidence": 0.6541,
       "filters": {
         "trendAlignment": {
           "pass": true,
@@ -3166,9 +3126,9 @@
       "bbozPrice": 21.46,
       "intervalReturnPct": -5.0863,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 480.5034,
-      "portfolioValueAfter": 456.0637,
-      "cumulativeReturnPct": -8.7873,
+      "portfolioValueBefore": 481.6548,
+      "portfolioValueAfter": 457.1566,
+      "cumulativeReturnPct": -8.5687,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3206,9 +3166,9 @@
       "bbozPrice": 20.78,
       "intervalReturnPct": 2.5154,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 456.0637,
-      "portfolioValueAfter": 465.6653,
-      "cumulativeReturnPct": -6.8669,
+      "portfolioValueBefore": 457.1566,
+      "portfolioValueAfter": 466.7812,
+      "cumulativeReturnPct": -6.6438,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3246,9 +3206,9 @@
       "bbozPrice": 21.28,
       "intervalReturnPct": -2.4537,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 465.6653,
-      "portfolioValueAfter": 454.2395,
-      "cumulativeReturnPct": -9.1521,
+      "portfolioValueBefore": 466.7812,
+      "portfolioValueAfter": 455.328,
+      "cumulativeReturnPct": -8.9344,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3286,9 +3246,9 @@
       "bbozPrice": 21.4,
       "intervalReturnPct": -0.531,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 454.2395,
-      "portfolioValueAfter": 451.8274,
-      "cumulativeReturnPct": -9.6345,
+      "portfolioValueBefore": 455.328,
+      "portfolioValueAfter": 452.9101,
+      "cumulativeReturnPct": -9.418,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3297,7 +3257,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.7067,
+      "rawConfidence": 0.7063,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3326,9 +3286,9 @@
       "bbozPrice": 21.58,
       "intervalReturnPct": 0.8411,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 451.8274,
-      "portfolioValueAfter": 453.8053,
-      "cumulativeReturnPct": -9.2389,
+      "portfolioValueBefore": 452.9101,
+      "portfolioValueAfter": 454.8928,
+      "cumulativeReturnPct": -9.0214,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3366,9 +3326,9 @@
       "bbozPrice": 21.28,
       "intervalReturnPct": -1.3902,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 453.8053,
-      "portfolioValueAfter": 447.4966,
-      "cumulativeReturnPct": -10.5007,
+      "portfolioValueBefore": 454.8928,
+      "portfolioValueAfter": 448.569,
+      "cumulativeReturnPct": -10.2862,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3377,7 +3337,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.5769,
+      "rawConfidence": 0.5776,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3406,9 +3366,9 @@
       "bbozPrice": 21.09,
       "intervalReturnPct": -0.8929,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 447.4966,
-      "portfolioValueAfter": 443.5011,
-      "cumulativeReturnPct": -11.2998,
+      "portfolioValueBefore": 448.569,
+      "portfolioValueAfter": 444.5639,
+      "cumulativeReturnPct": -11.0872,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3446,9 +3406,9 @@
       "bbozPrice": 21.41,
       "intervalReturnPct": -1.586,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 443.5011,
-      "portfolioValueAfter": 434.7214,
-      "cumulativeReturnPct": -13.0557,
+      "portfolioValueBefore": 444.5639,
+      "portfolioValueAfter": 435.7632,
+      "cumulativeReturnPct": -12.8474,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3486,9 +3446,9 @@
       "bbozPrice": 21.46,
       "intervalReturnPct": -0.0283,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 434.7214,
-      "portfolioValueAfter": 434.5985,
-      "cumulativeReturnPct": -13.0803,
+      "portfolioValueBefore": 435.7632,
+      "portfolioValueAfter": 435.64,
+      "cumulativeReturnPct": -12.872,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3497,7 +3457,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.6853,
+      "rawConfidence": 0.6854,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3526,9 +3486,9 @@
       "bbozPrice": 21.48,
       "intervalReturnPct": -0.1131,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 434.5985,
-      "portfolioValueAfter": 434.1069,
-      "cumulativeReturnPct": -13.1786,
+      "portfolioValueBefore": 435.64,
+      "portfolioValueAfter": 435.1472,
+      "cumulativeReturnPct": -12.9706,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3566,9 +3526,9 @@
       "bbozPrice": 21.63,
       "intervalReturnPct": -0.5096,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 434.1069,
-      "portfolioValueAfter": 431.8946,
-      "cumulativeReturnPct": -13.6211,
+      "portfolioValueBefore": 435.1472,
+      "portfolioValueAfter": 432.9295,
+      "cumulativeReturnPct": -13.4141,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3577,7 +3537,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.7065,
+      "rawConfidence": 0.7056,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3606,9 +3566,9 @@
       "bbozPrice": 21.56,
       "intervalReturnPct": -0.3236,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 431.8946,
-      "portfolioValueAfter": 428.7749,
-      "cumulativeReturnPct": -14.245,
+      "portfolioValueBefore": 432.9295,
+      "portfolioValueAfter": 429.8024,
+      "cumulativeReturnPct": -14.0395,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3617,7 +3577,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.417,
+      "rawConfidence": 0.4172,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3646,9 +3606,9 @@
       "bbozPrice": 21.75,
       "intervalReturnPct": 0.8813,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 428.7749,
-      "portfolioValueAfter": 432.5535,
-      "cumulativeReturnPct": -13.4893,
+      "portfolioValueBefore": 429.8024,
+      "portfolioValueAfter": 433.59,
+      "cumulativeReturnPct": -13.282,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3657,7 +3617,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.7214,
+      "rawConfidence": 0.7239,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3686,9 +3646,9 @@
       "bbozPrice": 20.83,
       "intervalReturnPct": -4.2299,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 432.5535,
-      "portfolioValueAfter": 414.257,
-      "cumulativeReturnPct": -17.1486,
+      "portfolioValueBefore": 433.59,
+      "portfolioValueAfter": 415.2497,
+      "cumulativeReturnPct": -16.9501,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3726,9 +3686,9 @@
       "bbozPrice": 20.6,
       "intervalReturnPct": 1.0953,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 414.257,
-      "portfolioValueAfter": 417.1191,
-      "cumulativeReturnPct": -16.5762,
+      "portfolioValueBefore": 415.2497,
+      "portfolioValueAfter": 418.1187,
+      "cumulativeReturnPct": -16.3763,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3766,9 +3726,9 @@
       "bbozPrice": 19.85,
       "intervalReturnPct": 3.4128,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 417.1191,
-      "portfolioValueAfter": 431.3545,
-      "cumulativeReturnPct": -13.7291,
+      "portfolioValueBefore": 418.1187,
+      "portfolioValueAfter": 432.3882,
+      "cumulativeReturnPct": -13.5224,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3806,9 +3766,9 @@
       "bbozPrice": 19.18,
       "intervalReturnPct": 3.0121,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 431.3545,
-      "portfolioValueAfter": 444.3471,
-      "cumulativeReturnPct": -11.1306,
+      "portfolioValueBefore": 432.3882,
+      "portfolioValueAfter": 445.4119,
+      "cumulativeReturnPct": -10.9176,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3846,9 +3806,9 @@
       "bbozPrice": 19.14,
       "intervalReturnPct": -0.0763,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 444.3471,
-      "portfolioValueAfter": 444.0082,
-      "cumulativeReturnPct": -11.1984,
+      "portfolioValueBefore": 445.4119,
+      "portfolioValueAfter": 445.0721,
+      "cumulativeReturnPct": -10.9856,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3857,7 +3817,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.8499,
+      "rawConfidence": 0.8498,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -3886,9 +3846,9 @@
       "bbozPrice": 20.12,
       "intervalReturnPct": -3.8168,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 444.0082,
-      "portfolioValueAfter": 427.0613,
-      "cumulativeReturnPct": -14.5877,
+      "portfolioValueBefore": 445.0721,
+      "portfolioValueAfter": 428.0847,
+      "cumulativeReturnPct": -14.3831,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3926,9 +3886,9 @@
       "bbozPrice": 20.23,
       "intervalReturnPct": 0.5467,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 427.0613,
-      "portfolioValueAfter": 427.6785,
-      "cumulativeReturnPct": -14.4643,
+      "portfolioValueBefore": 428.0847,
+      "portfolioValueAfter": 428.7034,
+      "cumulativeReturnPct": -14.2593,
       "priceSource": "intraday_14:00"
     },
     {
@@ -3966,9 +3926,9 @@
       "bbozPrice": 20.3,
       "intervalReturnPct": 0.346,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 427.6785,
-      "portfolioValueAfter": 429.1584,
-      "cumulativeReturnPct": -14.1683,
+      "portfolioValueBefore": 428.7034,
+      "portfolioValueAfter": 430.1868,
+      "cumulativeReturnPct": -13.9626,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4006,9 +3966,9 @@
       "bbozPrice": 19.79,
       "intervalReturnPct": -2.5123,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 429.1584,
-      "portfolioValueAfter": 418.3766,
-      "cumulativeReturnPct": -16.3247,
+      "portfolioValueBefore": 430.1868,
+      "portfolioValueAfter": 419.3791,
+      "cumulativeReturnPct": -16.1242,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4017,7 +3977,7 @@
       "allocatedAsset": "GEAR",
       "action": "FLIP",
       "rawPrediction": "BBOZ",
-      "rawConfidence": 0.3457,
+      "rawConfidence": 0.3456,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4046,9 +4006,9 @@
       "bbozPrice": 20.15,
       "intervalReturnPct": -1.7407,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 418.3766,
-      "portfolioValueAfter": 409.4495,
-      "cumulativeReturnPct": -18.1101,
+      "portfolioValueBefore": 419.3791,
+      "portfolioValueAfter": 410.4306,
+      "cumulativeReturnPct": -17.9139,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4057,7 +4017,7 @@
       "allocatedAsset": "GEAR",
       "action": "HOLD",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.6948,
+      "rawConfidence": 1.0,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4086,9 +4046,9 @@
       "bbozPrice": 20.3,
       "intervalReturnPct": -0.5817,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 409.4495,
-      "portfolioValueAfter": 407.0677,
-      "cumulativeReturnPct": -18.5865,
+      "portfolioValueBefore": 410.4306,
+      "portfolioValueAfter": 408.0431,
+      "cumulativeReturnPct": -18.3914,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4097,7 +4057,7 @@
       "allocatedAsset": "BBOZ",
       "action": "FLIP",
       "rawPrediction": "CASH",
-      "rawConfidence": 0.742,
+      "rawConfidence": 0.6988,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4126,9 +4086,9 @@
       "bbozPrice": 20.34,
       "intervalReturnPct": 0.197,
       "spreadCostPct": 0.4,
-      "portfolioValueBefore": 407.0677,
-      "portfolioValueAfter": 406.2383,
-      "cumulativeReturnPct": -18.7523,
+      "portfolioValueBefore": 408.0431,
+      "portfolioValueAfter": 407.2118,
+      "cumulativeReturnPct": -18.5576,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4166,9 +4126,9 @@
       "bbozPrice": 20.72,
       "intervalReturnPct": 1.8682,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 406.2383,
-      "portfolioValueAfter": 413.8278,
-      "cumulativeReturnPct": -17.2344,
+      "portfolioValueBefore": 407.2118,
+      "portfolioValueAfter": 414.8195,
+      "cumulativeReturnPct": -17.0361,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4177,7 +4137,7 @@
       "allocatedAsset": "BBOZ",
       "action": "HOLD",
       "rawPrediction": "GEAR",
-      "rawConfidence": 0.3946,
+      "rawConfidence": 0.3945,
       "filters": {
         "trendAlignment": {
           "pass": false,
@@ -4206,9 +4166,9 @@
       "bbozPrice": 21.78,
       "intervalReturnPct": 5.1158,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 413.8278,
-      "portfolioValueAfter": 434.9985,
-      "cumulativeReturnPct": -13.0003,
+      "portfolioValueBefore": 414.8195,
+      "portfolioValueAfter": 436.0409,
+      "cumulativeReturnPct": -12.7918,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4246,9 +4206,9 @@
       "bbozPrice": 22.05,
       "intervalReturnPct": 1.2397,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 434.9985,
-      "portfolioValueAfter": 440.3911,
-      "cumulativeReturnPct": -11.9218,
+      "portfolioValueBefore": 436.0409,
+      "portfolioValueAfter": 441.4464,
+      "cumulativeReturnPct": -11.7107,
       "priceSource": "intraday_14:00"
     },
     {
@@ -4286,720 +4246,760 @@
       "bbozPrice": 21.82,
       "intervalReturnPct": -1.0431,
       "spreadCostPct": 0.0,
-      "portfolioValueBefore": 440.3911,
-      "portfolioValueAfter": 435.7974,
-      "cumulativeReturnPct": -12.8405,
+      "portfolioValueBefore": 441.4464,
+      "portfolioValueAfter": 436.8417,
+      "cumulativeReturnPct": -12.6317,
+      "priceSource": "intraday_14:00"
+    },
+    {
+      "decisionDate": "2026-09-18",
+      "realizationDate": "2026-09-22",
+      "allocatedAsset": "BBOZ",
+      "action": "HOLD",
+      "rawPrediction": "BBOZ",
+      "rawConfidence": 0.6578,
+      "filters": {
+        "trendAlignment": {
+          "pass": true,
+          "detail": "bearish"
+        },
+        "relativeStrength": {
+          "pass": true,
+          "detail": "-3.62% vs required < 0%"
+        },
+        "liquidity": {
+          "pass": false,
+          "detail": "BBOZ.AX volume vs 50% of its 20-day average"
+        },
+        "pullbackNotExtended": {
+          "pass": true,
+          "detail": "-0.58% vs short EMA group"
+        }
+      },
+      "volatilityGuard": {
+        "pass": false,
+        "detail": "price below its 10-day MA; 10-day MA below its 30-day MA; 0.54% realized 15-day vol (normal vs its own 60-day baseline); price below its 30-day MA"
+      },
+      "actualDirection": "FLAT",
+      "predictionCorrect": false,
+      "gearPrice": 35.47,
+      "bbozPrice": 21.68,
+      "intervalReturnPct": -0.6416,
+      "spreadCostPct": 0.0,
+      "portfolioValueBefore": 436.8417,
+      "portfolioValueAfter": 434.0389,
+      "cumulativeReturnPct": -13.1922,
       "priceSource": "intraday_14:00"
     }
   ],
   "chartSeries": [
     {
-      "date": "2025-09-12",
+      "date": "2025-09-16",
       "portfolioValue": 500.0,
       "cumulativeProfit": 0.0
     },
     {
-      "date": "2025-09-16",
-      "portfolioValue": 498.6706,
-      "cumulativeProfit": -1.3294
-    },
-    {
       "date": "2025-09-19",
-      "portfolioValue": 489.6843,
-      "cumulativeProfit": -10.3157
+      "portfolioValue": 490.8578,
+      "cumulativeProfit": -9.1422
     },
     {
       "date": "2025-09-23",
-      "portfolioValue": 482.0728,
-      "cumulativeProfit": -17.9272
+      "portfolioValue": 483.228,
+      "cumulativeProfit": -16.772
     },
     {
       "date": "2025-09-26",
-      "portfolioValue": 470.3934,
-      "cumulativeProfit": -29.6066
+      "portfolioValue": 471.5206,
+      "cumulativeProfit": -28.4794
     },
     {
       "date": "2025-09-30",
-      "portfolioValue": 461.1846,
-      "cumulativeProfit": -38.8154
+      "portfolioValue": 462.2897,
+      "cumulativeProfit": -37.7103
     },
     {
       "date": "2025-10-03",
-      "portfolioValue": 474.298,
-      "cumulativeProfit": -25.702
+      "portfolioValue": 475.4345,
+      "cumulativeProfit": -24.5655
     },
     {
       "date": "2025-10-07",
-      "portfolioValue": 469.9352,
-      "cumulativeProfit": -30.0648
+      "portfolioValue": 471.0613,
+      "cumulativeProfit": -28.9387
     },
     {
       "date": "2025-10-10",
-      "portfolioValue": 470.1845,
-      "cumulativeProfit": -29.8155
+      "portfolioValue": 471.3112,
+      "cumulativeProfit": -28.6888
     },
     {
       "date": "2025-10-14",
-      "portfolioValue": 463.0794,
-      "cumulativeProfit": -36.9206
+      "portfolioValue": 464.1891,
+      "cumulativeProfit": -35.8109
     },
     {
       "date": "2025-10-17",
-      "portfolioValue": 449.9406,
-      "cumulativeProfit": -50.0594
+      "portfolioValue": 451.0188,
+      "cumulativeProfit": -48.9812
     },
     {
       "date": "2025-10-21",
-      "portfolioValue": 458.3874,
-      "cumulativeProfit": -41.6126
+      "portfolioValue": 459.4858,
+      "cumulativeProfit": -40.5142
     },
     {
       "date": "2025-10-24",
-      "portfolioValue": 450.8497,
-      "cumulativeProfit": -49.1503
+      "portfolioValue": 451.93,
+      "cumulativeProfit": -48.07
     },
     {
       "date": "2025-10-28",
-      "portfolioValue": 450.3786,
-      "cumulativeProfit": -49.6214
+      "portfolioValue": 451.4578,
+      "cumulativeProfit": -48.5422
     },
     {
       "date": "2025-10-31",
-      "portfolioValue": 461.6108,
-      "cumulativeProfit": -38.3892
+      "portfolioValue": 462.717,
+      "cumulativeProfit": -37.283
     },
     {
       "date": "2025-11-04",
-      "portfolioValue": 471.1689,
-      "cumulativeProfit": -28.8311
+      "portfolioValue": 472.2979,
+      "cumulativeProfit": -27.7021
     },
     {
       "date": "2025-11-07",
-      "portfolioValue": 476.8168,
-      "cumulativeProfit": -23.1832
+      "portfolioValue": 477.9594,
+      "cumulativeProfit": -22.0406
     },
     {
       "date": "2025-11-11",
-      "portfolioValue": 470.2999,
-      "cumulativeProfit": -29.7001
+      "portfolioValue": 471.4269,
+      "cumulativeProfit": -28.5731
     },
     {
       "date": "2025-11-14",
-      "portfolioValue": 492.8917,
-      "cumulativeProfit": -7.1083
+      "portfolioValue": 494.0729,
+      "cumulativeProfit": -5.9271
     },
     {
       "date": "2025-11-18",
-      "portfolioValue": 512.8768,
-      "cumulativeProfit": 12.8768
+      "portfolioValue": 514.1058,
+      "cumulativeProfit": 14.1058
     },
     {
       "date": "2025-11-21",
-      "portfolioValue": 519.8281,
-      "cumulativeProfit": 19.8281
+      "portfolioValue": 521.0737,
+      "cumulativeProfit": 21.0737
     },
     {
       "date": "2025-11-25",
-      "portfolioValue": 508.7494,
-      "cumulativeProfit": 8.7494
+      "portfolioValue": 509.9685,
+      "cumulativeProfit": 9.9685
     },
     {
       "date": "2025-11-28",
-      "portfolioValue": 495.064,
-      "cumulativeProfit": -4.936
+      "portfolioValue": 496.2504,
+      "cumulativeProfit": -3.7496
     },
     {
       "date": "2025-12-02",
-      "portfolioValue": 487.6918,
-      "cumulativeProfit": -12.3082
+      "portfolioValue": 488.8604,
+      "cumulativeProfit": -11.1396
     },
     {
       "date": "2025-12-05",
-      "portfolioValue": 491.9486,
-      "cumulativeProfit": -8.0514
+      "portfolioValue": 493.1274,
+      "cumulativeProfit": -6.8726
     },
     {
       "date": "2025-12-09",
-      "portfolioValue": 488.8269,
-      "cumulativeProfit": -11.1731
+      "portfolioValue": 489.9983,
+      "cumulativeProfit": -10.0017
     },
     {
       "date": "2025-12-12",
-      "portfolioValue": 475.2037,
-      "cumulativeProfit": -24.7963
+      "portfolioValue": 476.3424,
+      "cumulativeProfit": -23.6576
     },
     {
       "date": "2025-12-16",
-      "portfolioValue": 460.7243,
-      "cumulativeProfit": -39.2757
+      "portfolioValue": 461.8283,
+      "cumulativeProfit": -38.1717
     },
     {
       "date": "2025-12-19",
-      "portfolioValue": 455.0972,
-      "cumulativeProfit": -44.9028
+      "portfolioValue": 456.1877,
+      "cumulativeProfit": -43.8123
     },
     {
       "date": "2025-12-23",
-      "portfolioValue": 471.2878,
-      "cumulativeProfit": -28.7122
+      "portfolioValue": 472.4172,
+      "cumulativeProfit": -27.5828
     },
     {
       "date": "2025-12-30",
-      "portfolioValue": 462.4128,
-      "cumulativeProfit": -37.5872
+      "portfolioValue": 463.5209,
+      "cumulativeProfit": -36.4791
     },
     {
       "date": "2026-01-02",
-      "portfolioValue": 458.3669,
-      "cumulativeProfit": -41.6331
+      "portfolioValue": 459.4653,
+      "cumulativeProfit": -40.5347
     },
     {
       "date": "2026-01-06",
-      "portfolioValue": 454.0599,
-      "cumulativeProfit": -45.9401
+      "portfolioValue": 455.148,
+      "cumulativeProfit": -44.852
     },
     {
       "date": "2026-01-09",
-      "portfolioValue": 450.4379,
-      "cumulativeProfit": -49.5621
+      "portfolioValue": 451.5173,
+      "cumulativeProfit": -48.4827
     },
     {
       "date": "2026-01-13",
-      "portfolioValue": 436.7943,
-      "cumulativeProfit": -63.2057
+      "portfolioValue": 437.841,
+      "cumulativeProfit": -62.159
     },
     {
       "date": "2026-01-16",
-      "portfolioValue": 442.6732,
-      "cumulativeProfit": -57.3268
+      "portfolioValue": 443.734,
+      "cumulativeProfit": -56.266
     },
     {
       "date": "2026-01-20",
-      "portfolioValue": 433.4736,
-      "cumulativeProfit": -66.5264
+      "portfolioValue": 434.5123,
+      "cumulativeProfit": -65.4877
     },
     {
       "date": "2026-01-23",
-      "portfolioValue": 437.7102,
-      "cumulativeProfit": -62.2898
+      "portfolioValue": 438.7591,
+      "cumulativeProfit": -61.2409
     },
     {
       "date": "2026-01-27",
-      "portfolioValue": 445.2152,
-      "cumulativeProfit": -54.7848
+      "portfolioValue": 446.2821,
+      "cumulativeProfit": -53.7179
     },
     {
       "date": "2026-01-30",
-      "portfolioValue": 437.5892,
-      "cumulativeProfit": -62.4108
+      "portfolioValue": 438.6378,
+      "cumulativeProfit": -61.3622
     },
     {
       "date": "2026-02-03",
-      "portfolioValue": 439.0554,
-      "cumulativeProfit": -60.9446
+      "portfolioValue": 440.1075,
+      "cumulativeProfit": -59.8925
     },
     {
       "date": "2026-02-06",
-      "portfolioValue": 455.138,
-      "cumulativeProfit": -44.862
+      "portfolioValue": 456.2286,
+      "cumulativeProfit": -43.7714
     },
     {
       "date": "2026-02-10",
-      "portfolioValue": 436.4419,
-      "cumulativeProfit": -63.5581
+      "portfolioValue": 437.4878,
+      "cumulativeProfit": -62.5122
     },
     {
       "date": "2026-02-13",
-      "portfolioValue": 431.8182,
-      "cumulativeProfit": -68.1818
+      "portfolioValue": 432.853,
+      "cumulativeProfit": -67.147
     },
     {
       "date": "2026-02-17",
-      "portfolioValue": 426.1893,
-      "cumulativeProfit": -73.8107
+      "portfolioValue": 427.2106,
+      "cumulativeProfit": -72.7894
     },
     {
       "date": "2026-02-20",
-      "portfolioValue": 411.1118,
-      "cumulativeProfit": -88.8882
+      "portfolioValue": 412.097,
+      "cumulativeProfit": -87.903
     },
     {
       "date": "2026-02-24",
-      "portfolioValue": 417.1428,
-      "cumulativeProfit": -82.8572
+      "portfolioValue": 418.1424,
+      "cumulativeProfit": -81.8576
     },
     {
       "date": "2026-02-27",
-      "portfolioValue": 399.4519,
-      "cumulativeProfit": -100.5481
+      "portfolioValue": 400.4092,
+      "cumulativeProfit": -99.5908
     },
     {
       "date": "2026-03-03",
-      "portfolioValue": 409.9056,
-      "cumulativeProfit": -90.0944
+      "portfolioValue": 410.8879,
+      "cumulativeProfit": -89.1121
     },
     {
       "date": "2026-03-06",
-      "portfolioValue": 431.2151,
-      "cumulativeProfit": -68.7849
+      "portfolioValue": 432.2484,
+      "cumulativeProfit": -67.7516
     },
     {
       "date": "2026-03-10",
-      "portfolioValue": 447.6998,
-      "cumulativeProfit": -52.3002
+      "portfolioValue": 448.7726,
+      "cumulativeProfit": -51.2274
     },
     {
       "date": "2026-03-13",
-      "portfolioValue": 451.9215,
-      "cumulativeProfit": -48.0785
+      "portfolioValue": 453.0044,
+      "cumulativeProfit": -46.9956
     },
     {
       "date": "2026-03-17",
-      "portfolioValue": 454.7359,
-      "cumulativeProfit": -45.2641
+      "portfolioValue": 455.8256,
+      "cumulativeProfit": -44.1744
     },
     {
       "date": "2026-03-20",
-      "portfolioValue": 473.834,
-      "cumulativeProfit": -26.166
+      "portfolioValue": 474.9695,
+      "cumulativeProfit": -25.0305
     },
     {
       "date": "2026-03-24",
-      "portfolioValue": 480.8702,
-      "cumulativeProfit": -19.1298
+      "portfolioValue": 482.0225,
+      "cumulativeProfit": -17.9775
     },
     {
       "date": "2026-03-27",
-      "portfolioValue": 470.2154,
-      "cumulativeProfit": -29.7846
+      "portfolioValue": 471.3422,
+      "cumulativeProfit": -28.6578
     },
     {
       "date": "2026-03-31",
-      "portfolioValue": 471.8464,
-      "cumulativeProfit": -28.1536
+      "portfolioValue": 472.9771,
+      "cumulativeProfit": -27.0229
     },
     {
       "date": "2026-04-07",
-      "portfolioValue": 448.1004,
-      "cumulativeProfit": -51.8996
+      "portfolioValue": 449.1742,
+      "cumulativeProfit": -50.8258
     },
     {
       "date": "2026-04-10",
-      "portfolioValue": 472.0834,
-      "cumulativeProfit": -27.9166
+      "portfolioValue": 473.2147,
+      "cumulativeProfit": -26.7853
     },
     {
       "date": "2026-04-14",
-      "portfolioValue": 475.2577,
-      "cumulativeProfit": -24.7423
+      "portfolioValue": 476.3966,
+      "cumulativeProfit": -23.6034
     },
     {
       "date": "2026-04-17",
-      "portfolioValue": 470.5598,
-      "cumulativeProfit": -29.4402
+      "portfolioValue": 471.6874,
+      "cumulativeProfit": -28.3126
     },
     {
       "date": "2026-04-21",
-      "portfolioValue": 470.9407,
-      "cumulativeProfit": -29.0593
+      "portfolioValue": 472.0692,
+      "cumulativeProfit": -27.9308
     },
     {
       "date": "2026-04-24",
-      "portfolioValue": 489.1271,
-      "cumulativeProfit": -10.8729
+      "portfolioValue": 490.2992,
+      "cumulativeProfit": -9.7008
     },
     {
       "date": "2026-04-28",
-      "portfolioValue": 497.0199,
-      "cumulativeProfit": -2.9801
+      "portfolioValue": 498.211,
+      "cumulativeProfit": -1.789
     },
     {
       "date": "2026-05-01",
-      "portfolioValue": 493.8628,
-      "cumulativeProfit": -6.1372
+      "portfolioValue": 495.0462,
+      "cumulativeProfit": -4.9538
     },
     {
       "date": "2026-05-05",
-      "portfolioValue": 504.9127,
-      "cumulativeProfit": 4.9127
+      "portfolioValue": 506.1226,
+      "cumulativeProfit": 6.1226
     },
     {
       "date": "2026-05-08",
-      "portfolioValue": 496.1179,
-      "cumulativeProfit": -3.8821
+      "portfolioValue": 497.3067,
+      "cumulativeProfit": -2.6933
     },
     {
       "date": "2026-05-12",
-      "portfolioValue": 488.386,
-      "cumulativeProfit": -11.614
+      "portfolioValue": 489.5564,
+      "cumulativeProfit": -10.4436
     },
     {
       "date": "2026-05-15",
-      "portfolioValue": 493.222,
-      "cumulativeProfit": -6.778
+      "portfolioValue": 494.4039,
+      "cumulativeProfit": -5.5961
     },
     {
       "date": "2026-05-19",
-      "portfolioValue": 494.7551,
-      "cumulativeProfit": -5.2449
+      "portfolioValue": 495.9407,
+      "cumulativeProfit": -4.0593
     },
     {
       "date": "2026-05-22",
-      "portfolioValue": 486.6515,
-      "cumulativeProfit": -13.3485
+      "portfolioValue": 487.8177,
+      "cumulativeProfit": -12.1823
     },
     {
       "date": "2026-05-26",
-      "portfolioValue": 484.7049,
-      "cumulativeProfit": -15.2951
+      "portfolioValue": 485.8664,
+      "cumulativeProfit": -14.1336
     },
     {
       "date": "2026-05-29",
-      "portfolioValue": 491.8432,
-      "cumulativeProfit": -8.1568
+      "portfolioValue": 493.0218,
+      "cumulativeProfit": -6.9782
     },
     {
       "date": "2026-06-02",
-      "portfolioValue": 489.8837,
-      "cumulativeProfit": -10.1163
+      "portfolioValue": 491.0576,
+      "cumulativeProfit": -8.9424
     },
     {
       "date": "2026-06-05",
-      "portfolioValue": 480.086,
-      "cumulativeProfit": -19.914
+      "portfolioValue": 481.2364,
+      "cumulativeProfit": -18.7636
     },
     {
       "date": "2026-06-09",
-      "portfolioValue": 480.5034,
-      "cumulativeProfit": -19.4966
+      "portfolioValue": 481.6548,
+      "cumulativeProfit": -18.3452
     },
     {
       "date": "2026-06-12",
-      "portfolioValue": 456.0637,
-      "cumulativeProfit": -43.9363
+      "portfolioValue": 457.1566,
+      "cumulativeProfit": -42.8434
     },
     {
       "date": "2026-06-16",
-      "portfolioValue": 465.6653,
-      "cumulativeProfit": -34.3347
+      "portfolioValue": 466.7812,
+      "cumulativeProfit": -33.2188
     },
     {
       "date": "2026-06-19",
-      "portfolioValue": 454.2395,
-      "cumulativeProfit": -45.7605
+      "portfolioValue": 455.328,
+      "cumulativeProfit": -44.672
     },
     {
       "date": "2026-06-23",
-      "portfolioValue": 451.8274,
-      "cumulativeProfit": -48.1726
+      "portfolioValue": 452.9101,
+      "cumulativeProfit": -47.0899
     },
     {
       "date": "2026-06-26",
-      "portfolioValue": 453.8053,
-      "cumulativeProfit": -46.1947
+      "portfolioValue": 454.8928,
+      "cumulativeProfit": -45.1072
     },
     {
       "date": "2026-06-30",
-      "portfolioValue": 447.4966,
-      "cumulativeProfit": -52.5034
+      "portfolioValue": 448.569,
+      "cumulativeProfit": -51.431
     },
     {
       "date": "2026-07-03",
-      "portfolioValue": 443.5011,
-      "cumulativeProfit": -56.4989
+      "portfolioValue": 444.5639,
+      "cumulativeProfit": -55.4361
     },
     {
       "date": "2026-07-07",
-      "portfolioValue": 434.7214,
-      "cumulativeProfit": -65.2786
+      "portfolioValue": 435.7632,
+      "cumulativeProfit": -64.2368
     },
     {
       "date": "2026-07-10",
-      "portfolioValue": 434.5985,
-      "cumulativeProfit": -65.4015
+      "portfolioValue": 435.64,
+      "cumulativeProfit": -64.36
     },
     {
       "date": "2026-07-14",
-      "portfolioValue": 434.1069,
-      "cumulativeProfit": -65.8931
+      "portfolioValue": 435.1472,
+      "cumulativeProfit": -64.8528
     },
     {
       "date": "2026-07-17",
-      "portfolioValue": 431.8946,
-      "cumulativeProfit": -68.1054
+      "portfolioValue": 432.9295,
+      "cumulativeProfit": -67.0705
     },
     {
       "date": "2026-07-21",
-      "portfolioValue": 428.7749,
-      "cumulativeProfit": -71.2251
+      "portfolioValue": 429.8024,
+      "cumulativeProfit": -70.1976
     },
     {
       "date": "2026-07-24",
-      "portfolioValue": 432.5535,
-      "cumulativeProfit": -67.4465
+      "portfolioValue": 433.59,
+      "cumulativeProfit": -66.41
     },
     {
       "date": "2026-07-28",
-      "portfolioValue": 414.257,
-      "cumulativeProfit": -85.743
+      "portfolioValue": 415.2497,
+      "cumulativeProfit": -84.7503
     },
     {
       "date": "2026-07-31",
-      "portfolioValue": 417.1191,
-      "cumulativeProfit": -82.8809
+      "portfolioValue": 418.1187,
+      "cumulativeProfit": -81.8813
     },
     {
       "date": "2026-08-04",
-      "portfolioValue": 431.3545,
-      "cumulativeProfit": -68.6455
+      "portfolioValue": 432.3882,
+      "cumulativeProfit": -67.6118
     },
     {
       "date": "2026-08-07",
-      "portfolioValue": 444.3471,
-      "cumulativeProfit": -55.6529
+      "portfolioValue": 445.4119,
+      "cumulativeProfit": -54.5881
     },
     {
       "date": "2026-08-11",
-      "portfolioValue": 444.0082,
-      "cumulativeProfit": -55.9918
+      "portfolioValue": 445.0721,
+      "cumulativeProfit": -54.9279
     },
     {
       "date": "2026-08-14",
-      "portfolioValue": 427.0613,
-      "cumulativeProfit": -72.9387
+      "portfolioValue": 428.0847,
+      "cumulativeProfit": -71.9153
     },
     {
       "date": "2026-08-18",
-      "portfolioValue": 427.6785,
-      "cumulativeProfit": -72.3215
+      "portfolioValue": 428.7034,
+      "cumulativeProfit": -71.2966
     },
     {
       "date": "2026-08-21",
-      "portfolioValue": 429.1584,
-      "cumulativeProfit": -70.8416
+      "portfolioValue": 430.1868,
+      "cumulativeProfit": -69.8132
     },
     {
       "date": "2026-08-25",
-      "portfolioValue": 418.3766,
-      "cumulativeProfit": -81.6234
+      "portfolioValue": 419.3791,
+      "cumulativeProfit": -80.6209
     },
     {
       "date": "2026-08-28",
-      "portfolioValue": 409.4495,
-      "cumulativeProfit": -90.5505
+      "portfolioValue": 410.4306,
+      "cumulativeProfit": -89.5694
     },
     {
       "date": "2026-09-01",
-      "portfolioValue": 407.0677,
-      "cumulativeProfit": -92.9323
+      "portfolioValue": 408.0431,
+      "cumulativeProfit": -91.9569
     },
     {
       "date": "2026-09-04",
-      "portfolioValue": 406.2383,
-      "cumulativeProfit": -93.7617
+      "portfolioValue": 407.2118,
+      "cumulativeProfit": -92.7882
     },
     {
       "date": "2026-09-08",
-      "portfolioValue": 413.8278,
-      "cumulativeProfit": -86.1722
+      "portfolioValue": 414.8195,
+      "cumulativeProfit": -85.1805
     },
     {
       "date": "2026-09-11",
-      "portfolioValue": 434.9985,
-      "cumulativeProfit": -65.0015
+      "portfolioValue": 436.0409,
+      "cumulativeProfit": -63.9591
     },
     {
       "date": "2026-09-15",
-      "portfolioValue": 440.3911,
-      "cumulativeProfit": -59.6089
+      "portfolioValue": 441.4464,
+      "cumulativeProfit": -58.5536
     },
     {
       "date": "2026-09-18",
-      "portfolioValue": 435.7974,
-      "cumulativeProfit": -64.2026
+      "portfolioValue": 436.8417,
+      "cumulativeProfit": -63.1583
+    },
+    {
+      "date": "2026-09-22",
+      "portfolioValue": 434.0389,
+      "cumulativeProfit": -65.9611
     }
   ],
   "validation": {
     "windows": [
       {
         "windowIndex": 0,
-        "startDate": "2025-09-12",
-        "endDate": "2026-09-18",
+        "startDate": "2025-09-16",
+        "endDate": "2026-09-22",
         "initialCapital": 500.0,
-        "currentValue": 435.8,
-        "totalReturnPct": -12.8405,
+        "currentValue": 434.04,
+        "totalReturnPct": -13.1922,
         "totalTrades": 104,
-        "wins": 48,
-        "losses": 56,
+        "wins": 47,
+        "losses": 57,
         "cashSessions": 0,
-        "winRatePct": 46.15,
+        "winRatePct": 45.19,
         "currentStreak": {
           "type": "L",
-          "length": 1
+          "length": 2
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 47,
-            "wins": 18,
+            "trades": 46,
+            "wins": 17,
             "losses": 29,
-            "winRatePct": 38.3,
-            "dollarPnl": -44.7947,
-            "contributionPct": 69.77
+            "winRatePct": 36.96,
+            "dollarPnl": -43.7039,
+            "contributionPct": 66.26
           },
           "BBOZ": {
-            "trades": 57,
+            "trades": 58,
             "wins": 30,
-            "losses": 27,
-            "winRatePct": 52.63,
-            "dollarPnl": -19.4079,
-            "contributionPct": 30.23
+            "losses": 28,
+            "winRatePct": 51.72,
+            "dollarPnl": -22.2572,
+            "contributionPct": 33.74
           }
         },
-        "buyHoldGearReturnPct": -5.0094,
+        "buyHoldGearReturnPct": -4.6249,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": -1.5082,
+        "buyHoldAxjoReturnPct": -1.3506,
         "beatBuyHoldAxjo": false,
-        "sharpeRatio": -0.469,
+        "sharpeRatio": -0.486,
         "maxDrawdownPct": 23.16
       },
       {
         "windowIndex": 1,
-        "startDate": "2024-09-06",
-        "endDate": "2025-09-12",
+        "startDate": "2024-09-10",
+        "endDate": "2025-09-16",
         "initialCapital": 500.0,
-        "currentValue": 553.53,
-        "totalReturnPct": 10.7054,
+        "currentValue": 554.62,
+        "totalReturnPct": 10.9246,
         "totalTrades": 104,
-        "wins": 53,
-        "losses": 51,
+        "wins": 54,
+        "losses": 50,
         "cashSessions": 0,
-        "winRatePct": 50.96,
+        "winRatePct": 51.92,
         "currentStreak": {
-          "type": "L",
+          "type": "W",
           "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 60,
-            "wins": 36,
+            "trades": 61,
+            "wins": 37,
             "losses": 24,
-            "winRatePct": 60.0,
-            "dollarPnl": 99.1374,
-            "contributionPct": 185.21
+            "winRatePct": 60.66,
+            "dollarPnl": 98.2428,
+            "contributionPct": 179.86
           },
           "BBOZ": {
-            "trades": 44,
+            "trades": 43,
             "wins": 17,
-            "losses": 27,
-            "winRatePct": 38.64,
-            "dollarPnl": -45.6105,
-            "contributionPct": -85.21
+            "losses": 26,
+            "winRatePct": 39.53,
+            "dollarPnl": -43.6199,
+            "contributionPct": -79.86
           }
         },
-        "buyHoldGearReturnPct": 23.0693,
+        "buyHoldGearReturnPct": 23.2681,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 10.626,
+        "buyHoldAxjoReturnPct": 10.8064,
         "beatBuyHoldAxjo": true,
-        "sharpeRatio": 0.518,
+        "sharpeRatio": 0.525,
         "maxDrawdownPct": 17.48
       },
       {
         "windowIndex": 2,
-        "startDate": "2023-08-29",
-        "endDate": "2024-09-06",
+        "startDate": "2023-09-01",
+        "endDate": "2024-09-10",
         "initialCapital": 500.0,
-        "currentValue": 443.85,
-        "totalReturnPct": -11.2306,
+        "currentValue": 431.03,
+        "totalReturnPct": -13.7931,
         "totalTrades": 104,
-        "wins": 51,
-        "losses": 53,
+        "wins": 50,
+        "losses": 54,
         "cashSessions": 0,
-        "winRatePct": 49.04,
+        "winRatePct": 48.08,
         "currentStreak": {
           "type": "L",
-          "length": 1
+          "length": 2
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 60,
-            "wins": 34,
+            "trades": 59,
+            "wins": 33,
             "losses": 26,
-            "winRatePct": 56.67,
-            "dollarPnl": 23.8031,
-            "contributionPct": -42.39
+            "winRatePct": 55.93,
+            "dollarPnl": 10.9108,
+            "contributionPct": -15.82
           },
           "BBOZ": {
-            "trades": 44,
+            "trades": 45,
             "wins": 17,
-            "losses": 27,
-            "winRatePct": 38.64,
-            "dollarPnl": -79.9559,
-            "contributionPct": 142.39
+            "losses": 28,
+            "winRatePct": 37.78,
+            "dollarPnl": -79.8762,
+            "contributionPct": 115.82
           }
         },
-        "buyHoldGearReturnPct": 24.721,
+        "buyHoldGearReturnPct": 21.1647,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 11.1351,
+        "buyHoldAxjoReturnPct": 10.0793,
         "beatBuyHoldAxjo": false,
-        "sharpeRatio": -0.344,
+        "sharpeRatio": -0.463,
         "maxDrawdownPct": 16.44
       },
       {
         "windowIndex": 3,
-        "startDate": "2022-08-19",
-        "endDate": "2023-08-29",
+        "startDate": "2022-08-23",
+        "endDate": "2023-09-01",
         "initialCapital": 500.0,
-        "currentValue": 500.39,
-        "totalReturnPct": 0.0777,
+        "currentValue": 540.91,
+        "totalReturnPct": 8.1823,
         "totalTrades": 104,
-        "wins": 56,
-        "losses": 48,
+        "wins": 57,
+        "losses": 47,
         "cashSessions": 0,
-        "winRatePct": 53.85,
+        "winRatePct": 54.81,
         "currentStreak": {
-          "type": "L",
+          "type": "W",
           "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
             "trades": 49,
-            "wins": 27,
-            "losses": 22,
-            "winRatePct": 55.1,
-            "dollarPnl": 24.1102,
-            "contributionPct": 6202.78
+            "wins": 28,
+            "losses": 21,
+            "winRatePct": 57.14,
+            "dollarPnl": 65.9232,
+            "contributionPct": 161.14
           },
           "BBOZ": {
             "trades": 55,
             "wins": 29,
             "losses": 26,
             "winRatePct": 52.73,
-            "dollarPnl": -23.7215,
-            "contributionPct": -6102.78
+            "dollarPnl": -25.0119,
+            "contributionPct": -61.14
           }
         },
-        "buyHoldGearReturnPct": 1.4256,
+        "buyHoldGearReturnPct": 10.0796,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 1.3494,
-        "beatBuyHoldAxjo": false,
-        "sharpeRatio": 0.166,
-        "maxDrawdownPct": 21.16
+        "buyHoldAxjoReturnPct": 4.5462,
+        "beatBuyHoldAxjo": true,
+        "sharpeRatio": 0.403,
+        "maxDrawdownPct": 18.2
       },
       {
         "windowIndex": 4,
-        "startDate": "2021-08-13",
-        "endDate": "2022-08-19",
+        "startDate": "2021-08-17",
+        "endDate": "2022-08-23",
         "initialCapital": 500.0,
-        "currentValue": 476.36,
-        "totalReturnPct": -4.7278,
+        "currentValue": 466.42,
+        "totalReturnPct": -6.7153,
         "totalTrades": 104,
         "wins": 56,
         "losses": 48,
         "cashSessions": 0,
         "winRatePct": 53.85,
         "currentStreak": {
-          "type": "W",
-          "length": 9
+          "type": "L",
+          "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
@@ -5007,162 +5007,162 @@
             "wins": 32,
             "losses": 17,
             "winRatePct": 65.31,
-            "dollarPnl": -49.3495,
-            "contributionPct": 208.76
+            "dollarPnl": -60.1197,
+            "contributionPct": 179.05
           },
           "BBOZ": {
             "trades": 55,
             "wins": 24,
             "losses": 31,
             "winRatePct": 43.64,
-            "dollarPnl": 25.7107,
-            "contributionPct": -108.76
+            "dollarPnl": 26.543,
+            "contributionPct": -79.05
           }
         },
-        "buyHoldGearReturnPct": -20.4204,
+        "buyHoldGearReturnPct": -22.0806,
         "beatBuyHoldGear": true,
-        "buyHoldAxjoReturnPct": -6.7428,
+        "buyHoldAxjoReturnPct": -7.3119,
         "beatBuyHoldAxjo": true,
-        "sharpeRatio": 0.025,
+        "sharpeRatio": -0.035,
         "maxDrawdownPct": 30.4
       },
       {
         "windowIndex": 5,
-        "startDate": "2020-07-31",
-        "endDate": "2021-08-13",
+        "startDate": "2020-08-04",
+        "endDate": "2021-08-17",
         "initialCapital": 500.0,
-        "currentValue": 284.72,
-        "totalReturnPct": -43.0551,
+        "currentValue": 289.26,
+        "totalReturnPct": -42.1472,
         "totalTrades": 104,
         "wins": 43,
         "losses": 61,
         "cashSessions": 0,
         "winRatePct": 41.35,
         "currentStreak": {
-          "type": "W",
-          "length": 4
+          "type": "L",
+          "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 65,
+            "trades": 66,
             "wins": 32,
-            "losses": 33,
-            "winRatePct": 49.23,
-            "dollarPnl": 8.4714,
-            "contributionPct": -3.94
+            "losses": 34,
+            "winRatePct": 48.48,
+            "dollarPnl": -0.4811,
+            "contributionPct": 0.23
           },
           "BBOZ": {
-            "trades": 39,
+            "trades": 38,
             "wins": 11,
-            "losses": 28,
-            "winRatePct": 28.21,
-            "dollarPnl": -223.7468,
-            "contributionPct": 103.94
+            "losses": 27,
+            "winRatePct": 28.95,
+            "dollarPnl": -210.2548,
+            "contributionPct": 99.77
           }
         },
-        "buyHoldGearReturnPct": 73.1369,
+        "buyHoldGearReturnPct": 60.831,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 28.697,
+        "buyHoldAxjoReturnPct": 24.4037,
         "beatBuyHoldAxjo": false,
-        "sharpeRatio": -1.759,
-        "maxDrawdownPct": 47.05
+        "sharpeRatio": -1.717,
+        "maxDrawdownPct": 44.46
       },
       {
         "windowIndex": 6,
-        "startDate": "2019-07-30",
-        "endDate": "2020-07-31",
+        "startDate": "2019-08-02",
+        "endDate": "2020-08-04",
         "initialCapital": 500.0,
-        "currentValue": 652.15,
-        "totalReturnPct": 30.43,
+        "currentValue": 640.17,
+        "totalReturnPct": 28.0331,
         "totalTrades": 104,
         "wins": 47,
         "losses": 57,
         "cashSessions": 0,
         "winRatePct": 45.19,
         "currentStreak": {
-          "type": "W",
+          "type": "L",
           "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 58,
+            "trades": 57,
             "wins": 31,
-            "losses": 27,
-            "winRatePct": 53.45,
-            "dollarPnl": 120.3283,
-            "contributionPct": 79.09
+            "losses": 26,
+            "winRatePct": 54.39,
+            "dollarPnl": 138.6688,
+            "contributionPct": 98.93
           },
           "BBOZ": {
-            "trades": 46,
+            "trades": 47,
             "wins": 16,
-            "losses": 30,
-            "winRatePct": 34.78,
-            "dollarPnl": 31.8216,
-            "contributionPct": 20.91
+            "losses": 31,
+            "winRatePct": 34.04,
+            "dollarPnl": 1.4967,
+            "contributionPct": 1.07
           }
         },
-        "buyHoldGearReturnPct": -37.0774,
+        "buyHoldGearReturnPct": -32.4476,
         "beatBuyHoldGear": true,
-        "buyHoldAxjoReturnPct": -13.4008,
+        "buyHoldAxjoReturnPct": -10.7999,
         "beatBuyHoldAxjo": true,
-        "sharpeRatio": 0.761,
+        "sharpeRatio": 0.724,
         "maxDrawdownPct": 31.36
       },
       {
         "windowIndex": 7,
-        "startDate": "2018-10-09",
-        "endDate": "2019-07-30",
+        "startDate": "2018-10-12",
+        "endDate": "2019-08-02",
         "initialCapital": 500.0,
-        "currentValue": 449.59,
-        "totalReturnPct": -10.0819,
+        "currentValue": 413.29,
+        "totalReturnPct": -17.3428,
         "totalTrades": 81,
-        "wins": 43,
-        "losses": 38,
+        "wins": 42,
+        "losses": 39,
         "cashSessions": 0,
-        "winRatePct": 53.09,
+        "winRatePct": 51.85,
         "currentStreak": {
-          "type": "W",
-          "length": 3
+          "type": "L",
+          "length": 1
         },
         "assetBreakdown": {
           "GEAR": {
-            "trades": 47,
+            "trades": 48,
             "wins": 30,
-            "losses": 17,
-            "winRatePct": 63.83,
-            "dollarPnl": 47.5649,
-            "contributionPct": -94.36
+            "losses": 18,
+            "winRatePct": 62.5,
+            "dollarPnl": 32.7976,
+            "contributionPct": -37.82
           },
           "BBOZ": {
-            "trades": 34,
-            "wins": 13,
+            "trades": 33,
+            "wins": 12,
             "losses": 21,
-            "winRatePct": 38.24,
-            "dollarPnl": -97.9746,
-            "contributionPct": 194.36
+            "winRatePct": 36.36,
+            "dollarPnl": -119.5116,
+            "contributionPct": 137.82
           }
         },
-        "buyHoldGearReturnPct": 20.131,
+        "buyHoldGearReturnPct": 25.0351,
         "beatBuyHoldGear": false,
-        "buyHoldAxjoReturnPct": 13.3088,
+        "buyHoldAxjoReturnPct": 14.8057,
         "beatBuyHoldAxjo": false,
-        "sharpeRatio": -0.333,
+        "sharpeRatio": -0.729,
         "maxDrawdownPct": 25.08
       }
     ],
     "summary": {
       "windowsEvaluated": 8,
-      "meanWinRatePct": 49.19,
-      "stdDevWinRatePct": 4.61,
-      "meanTotalReturnPct": -5.09,
-      "stdDevTotalReturnPct": 21.05,
-      "meanBuyHoldGearReturnPct": 10.0,
+      "meanWinRatePct": 49.03,
+      "stdDevWinRatePct": 4.82,
+      "meanTotalReturnPct": -5.76,
+      "stdDevTotalReturnPct": 21.36,
+      "meanBuyHoldGearReturnPct": 10.15,
       "windowsBeatingBuyHoldGear": 2,
-      "meanBuyHoldAxjoReturnPct": 5.43,
-      "windowsBeatingBuyHoldAxjo": 3,
-      "meanSharpeRatio": -0.179,
-      "meanMaxDrawdownPct": 26.52,
-      "worstMaxDrawdownPct": 47.05
+      "meanBuyHoldAxjoReturnPct": 5.65,
+      "windowsBeatingBuyHoldAxjo": 4,
+      "meanSharpeRatio": -0.222,
+      "meanMaxDrawdownPct": 25.82,
+      "worstMaxDrawdownPct": 44.46
     }
   }
 }
